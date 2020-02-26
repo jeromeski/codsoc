@@ -1,3 +1,15 @@
+html {
+  font-size: 100%; }
+  @media (max-width: 75em) {
+    html {
+      font-size: 75%; } }
+  @media (max-width: 56.25em) {
+    html {
+      font-size: 75%; } }
+  @media (min-width: 112.5em) {
+    html {
+      font-size: 90%; } }
+
 .masthead {
   height: 100vh;
   width: 100vw;

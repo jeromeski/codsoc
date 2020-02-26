@@ -47,7 +47,7 @@ class Register extends Component {
         <Container className="h-100">
           <Row className="h-100">
             <Col></Col>
-            <Col className="my-auto" xs={5}
+            <Col className="my-auto" lg={5}
               style={{border: '2px solid lightgrey', padding: '2rem'}}
             >
               <Form onSubmit={this.handleFormSubmit}>
