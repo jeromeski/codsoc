@@ -5,6 +5,8 @@ import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import classnames from "classnames";
 import { connect } from "react-redux";
 import { registerUser } from "../../redux/auth/auth.actions";
+import ReactTimeout from 'react-timeout'
+
 // import LoadingButton from "../button/LoadingButton";
 
 class Register extends Component {
@@ -28,12 +30,17 @@ class Register extends Component {
   //   return state
   // }
 
-  UNSAFE_componentWillReceiveProps = nextProps => {
-    if (nextProps.errors && nextProps.isLoading) {
+  UNSAFE_componentWillReceiveProps = (nextProps) => {
+    if (nextProps.errors) {
       this.setState({
         errors: nextProps.errors,
         isLoading: nextProps.isLoading
       });
+      nextProps.setTimeout(() => {
+        this.setState({
+          isLoading: false
+        })
+      }, 2000);
     }
   };
 
@@ -67,7 +74,7 @@ class Register extends Component {
               className="my-auto"
               md={5}
               style={{ border: "2px solid lightgrey", padding: "2rem" }}>
-              <Form onSubmit={this.handleFormSubmit}>
+              <Form onSubmit={this.handleFormSubmit} autoComplete='off'>
                 <div className="text-center" style={{ marginBottom: "1rem" }}>
                   <h3 style={{ fontWeight: 700 }}>Don't have an account?</h3>
                   <h5
@@ -163,4 +170,4 @@ const mapStateToProps = ({ auth, errors, isLoading }) => ({
   isLoading
 });
 
-export default connect(mapStateToProps, { registerUser })(withRouter(Register));
+export default connect(mapStateToProps, { registerUser })(withRouter(ReactTimeout(Register)));

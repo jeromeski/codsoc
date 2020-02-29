@@ -31,7 +31,7 @@ export const registerUser = (userData, history) => dispatch => {
 
 // Login - Get User Token
 
-export const loginUser = (userData, history) => dispatch => {
+export const loginUser = (userData) => dispatch => {
   dispatch({
     type: ASYNC_ACTION_START
   });
@@ -52,14 +52,14 @@ export const loginUser = (userData, history) => dispatch => {
       // Set current user
       dispatch(setCurrentUser(decoded));
     })
-    .catch(err =>{
-      dispatch({
-        type: ASYNC_ACTION_FINISH
-      });
+    .catch(err => {
       dispatch({
         type: GET_ERRORS,
         payload: err.response.data
       })
+      dispatch({
+        type: ASYNC_ACTION_FINISH
+      });
     });
 };
 

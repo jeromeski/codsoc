@@ -4,6 +4,8 @@ import classnames from "classnames";
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import { loginUser } from '../../redux/auth/auth.actions';
+import ReactTimeout from 'react-timeout'
+
 
 class Login extends Component {
   state = {
@@ -18,8 +20,16 @@ class Login extends Component {
       this.props.history.push('/dashboard');
     }
 
-    if(nextProps.errors) {
-      this.setState({errors: nextProps.errors});
+    if (nextProps.errors) {
+      this.setState({
+        errors: nextProps.errors,
+        isLoading: nextProps.isLoading
+      });
+      nextProps.setTimeout(() => {
+        this.setState({
+          isLoading: false
+        })
+      }, 2000);
     }
   }
 
@@ -29,7 +39,8 @@ class Login extends Component {
     });
   };
 
-  handleFormSubmit = () => {
+  handleFormSubmit = (evt) => {
+    evt.preventDefault();
     const userData     = {
       email: this.state.email,
       password: this.state.password,
@@ -47,7 +58,7 @@ class Login extends Component {
             <Col></Col>
             <Col className="my-auto" lg={5} 
               style={{border: '2px solid lightgrey', padding: '2rem'}}>
-              <Form onSubmit={this.handleFormSubmit}>
+              <Form onSubmit={this.handleFormSubmit} autoComplete='off'>
                 <div className="text-center" style={{ marginBottom: "1rem" }}>
                   <h3 style={{ fontWeight: 700 }}>Sign in and stay updated.</h3>
                   <h5
@@ -112,4 +123,4 @@ const mapStateToProps = ({auth, errors, isLoading}) => ({
   isLoading 
 })
 
-export default connect(mapStateToProps, {loginUser})(Login);
+export default connect(mapStateToProps, {loginUser})(ReactTimeout(Login));
