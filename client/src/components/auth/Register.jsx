@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router";
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import { Container, Row, Col, Form, Button, Spinner, Card } from "react-bootstrap";
 import classnames from "classnames";
 import { connect } from "react-redux";
 import { registerUser } from "../../redux/auth/auth.actions";
-import ReactTimeout from 'react-timeout'
+import ReactTimeout from "react-timeout";
 
 // import LoadingButton from "../button/LoadingButton";
 
@@ -30,7 +30,7 @@ class Register extends Component {
   //   return state
   // }
 
-  UNSAFE_componentWillReceiveProps = (nextProps) => {
+  UNSAFE_componentWillReceiveProps = nextProps => {
     if (nextProps.errors) {
       this.setState({
         errors: nextProps.errors,
@@ -39,7 +39,7 @@ class Register extends Component {
       nextProps.setTimeout(() => {
         this.setState({
           isLoading: false
-        })
+        });
       }, 2000);
     }
   };
@@ -68,86 +68,98 @@ class Register extends Component {
     return (
       <div className="register">
         <Container className="h-100">
-          <Row className="h-100">
-            <Col></Col>
+          <Row className="h-25">
             <Col
-              className="my-auto"
-              md={5}
-              style={{ border: "2px solid lightgrey", padding: "2rem" }}>
-              <Form onSubmit={this.handleFormSubmit} autoComplete='off'>
-                <div className="text-center" style={{ marginBottom: "1rem" }}>
-                  <h3 style={{ fontWeight: 700 }}>Don't have an account?</h3>
-                  <h5
-                    style={{
-                      paddingBottom: "1rem",
-                      borderBottom: "solid 2px lightgrey"
-                    }}>
-                    Join now by registering here!
-                  </h5>
-                </div>
-                <Form.Group controlId="formBasicName" as={Col} md="12">
-                  <Form.Label>Name</Form.Label>
-                  <Form.Control
-                    className={classnames({ "is-invalid": errors.name })}
-                    name="name"
-                    value={name}
-                    type="text"
-                    placeholder="Enter name"
-                    onChange={this.handleTitleChange}
-                  />
-                  {errors.name && (
-                    <div className="invalid-feedback">{errors.name}</div>
-                  )}
-                </Form.Group>
-                <Form.Group controlId="formBasicEmail" as={Col} md="12">
-                  <Form.Label>Email address</Form.Label>
-                  <Form.Control
-                    className={classnames({ "is-invalid": errors.email })}
-                    name="email"
-                    value={email}
-                    type="email"
-                    placeholder="Enter email"
-                    onChange={this.handleTitleChange}
-                  />
-                  {errors.email && (
-                    <div className="invalid-feedback">{errors.email}</div>
-                  )}
-                </Form.Group>
-                <Form.Group controlId="formBasicPassword" as={Col} md="12">
-                  <Form.Label>Password</Form.Label>
-                  <Form.Control
-                    className={classnames({ "is-invalid": errors.password })}
-                    name="password"
-                    value={password}
-                    type="password"
-                    placeholder="Password"
-                    onChange={this.handleTitleChange}
-                  />
-                  {errors.password && (
-                    <div className="invalid-feedback">{errors.password}</div>
-                  )}
-                </Form.Group>
-                <Form.Group controlId="formBasicPassword2" as={Col} md="12">
-                  <Form.Label>Confirm Password</Form.Label>
-                  <Form.Control
-                    className={classnames({ "is-invalid": errors.password2 })}
-                    name="password2"
-                    value={password2}
-                    type="password"
-                    placeholder="Confirm password"
-                    onChange={this.handleTitleChange}
-                  />
-                  {errors.password2 && (
-                    <div className="invalid-feedback">{errors.password2}</div>
-                  )}
-                </Form.Group>
-                <Button
-                  variant="success"
-                  type="submit"
-                  style={{ marginLeft: "1rem" }}>
-                  {isLoading ? 'Loading...' : "Submit"}
-                </Button>
-              </Form>
+              className="text-center"
+              style={{ marginBottom: 0, marginTop: "100px" }}>
+              <h1 className="font-weight-bolder">Code Society</h1>
+              <h3>Network with the world's coding professionals</h3>
+            </Col>
+          </Row>
+          <Row className="h-75">
+            <Col></Col>
+            <Col className="my-top" md={4} style={{ paddingTop: "2rem" }}>
+              <Card bg='light' className="border border-secondary">
+                <Form
+                  onSubmit={this.handleFormSubmit}
+                  autoComplete="off"
+                  style={{ padding: "2rem 1rem  1rem 1rem" }}>
+                  <Form.Group controlId="formBasicName" as={Col}>
+                    <Form.Control
+                      className={classnames({ "is-invalid": errors.name })}
+                      name="name"
+                      value={name}
+                      type="text"
+                      placeholder="Enter name"
+                      onChange={this.handleTitleChange}
+                    />
+                    {errors.name && (
+                      <div className="invalid-feedback">{errors.name}</div>
+                    )}
+                  </Form.Group>
+                  <Form.Group controlId="formBasicEmail" as={Col}>
+                    <Form.Control
+                      className={classnames({ "is-invalid": errors.email })}
+                      name="email"
+                      value={email}
+                      type="email"
+                      placeholder="Enter email"
+                      onChange={this.handleTitleChange}
+                    />
+                    {errors.email && (
+                      <div className="invalid-feedback">{errors.email}</div>
+                    )}
+                  </Form.Group>
+                  <Form.Group controlId="formBasicPassword" as={Col}>
+                    <Form.Control
+                      className={classnames({ "is-invalid": errors.password })}
+                      name="password"
+                      value={password}
+                      type="password"
+                      placeholder="Password"
+                      onChange={this.handleTitleChange}
+                    />
+                    {errors.password && (
+                      <div className="invalid-feedback">{errors.password}</div>
+                    )}
+                  </Form.Group>
+                  <Form.Group controlId="formBasicPassword2" as={Col}>
+                    <Form.Control
+                      className={classnames({ "is-invalid": errors.password2 })}
+                      name="password2"
+                      value={password2}
+                      type="password"
+                      placeholder="Confirm password"
+                      onChange={this.handleTitleChange}
+                    />
+                    {errors.password2 && (
+                      <div className="invalid-feedback">{errors.password2}</div>
+                    )}
+                  </Form.Group>
+                  <Form.Group as={Col}>
+                    <Button
+                      className="btn-block"
+                      variant="success"
+                      type="submit"
+                      style={{ padding: ".5rem 1rem", marginTop: "1rem" }}>
+                      {isLoading ? (
+                        <div>
+                          <Spinner
+                            as="span"
+                            animation="border"
+                            size="sm"
+                            role="status"
+                            aria-hidden="true"
+                          />
+                          &nbsp; &nbsp; Loading...
+                        </div>
+                      ) : (
+                        "I agree to the Terms & Conditions"
+                      )}
+                    </Button>
+                  </Form.Group>
+                </Form>
+              </Card>
             </Col>
             <Col></Col>
           </Row>
@@ -170,4 +182,6 @@ const mapStateToProps = ({ auth, errors, isLoading }) => ({
   isLoading
 });
 
-export default connect(mapStateToProps, { registerUser })(withRouter(ReactTimeout(Register)));
+export default connect(mapStateToProps, { registerUser })(
+  withRouter(ReactTimeout(Register))
+);

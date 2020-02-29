@@ -1,23 +1,22 @@
 import React, { Component } from "react";
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import { Container, Row, Col, Form, Button, Spinner, Card } from "react-bootstrap";
 import classnames from "classnames";
-import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import { loginUser } from '../../redux/auth/auth.actions';
-import ReactTimeout from 'react-timeout'
-
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { loginUser } from "../../redux/auth/auth.actions";
+import ReactTimeout from "react-timeout";
 
 class Login extends Component {
   state = {
     email: "",
     password: "",
-    isLoading: '',
+    isLoading: "",
     errors: {}
   };
 
   UNSAFE_componentWillReceiveProps(nextProps) {
-    if(nextProps.auth.isAuthenticated) {
-      this.props.history.push('/dashboard');
+    if (nextProps.auth.isAuthenticated) {
+      this.props.history.push("/dashboard");
     }
 
     if (nextProps.errors) {
@@ -28,7 +27,7 @@ class Login extends Component {
       nextProps.setTimeout(() => {
         this.setState({
           isLoading: false
-        })
+        });
       }, 2000);
     }
   }
@@ -39,13 +38,13 @@ class Login extends Component {
     });
   };
 
-  handleFormSubmit = (evt) => {
+  handleFormSubmit = evt => {
     evt.preventDefault();
-    const userData     = {
+    const userData = {
       email: this.state.email,
       password: this.state.password,
       isLoading: this.state.isLoading
-    }
+    };
     this.props.loginUser(userData);
   };
 
@@ -54,53 +53,75 @@ class Login extends Component {
     return (
       <div className="register">
         <Container className="h-100">
-          <Row className="h-100">
+          <Row className="h-25">
+            <Col
+              className="my-bottom text-center"
+              style={{ marginBottom: 0, marginTop: "10%" }}>
+              <h3 style={{ fontWeight: 700 }}>Sign in and stay updated.</h3>
+              <h5 style={{}}>Enter your email & password</h5>
+            </Col>
+          </Row>
+          <Row className="h-75">
             <Col></Col>
-            <Col className="my-auto" lg={5} 
-              style={{border: '2px solid lightgrey', padding: '2rem'}}>
-              <Form onSubmit={this.handleFormSubmit} autoComplete='off'>
-                <div className="text-center" style={{ marginBottom: "1rem" }}>
-                  <h3 style={{ fontWeight: 700 }}>Sign in and stay updated.</h3>
-                  <h5
-                    style={{
-                      paddingBottom: "1rem",
-                      borderBottom: "solid 2px lightgrey"
-                    }}>
-                    Enter your email & password
-                  </h5>
-                </div>
-                <Form.Group controlId="formBasicEmail">
-                  <Form.Label>Email address</Form.Label>
-                  <Form.Control
-                    className={classnames({ "is-invalid": errors.email })}
-                    name="email"
-                    value={email}
-                    type="email"
-                    placeholder="Enter email"
-                    onChange={this.handleTitleChange}
-                  />
-                  {errors.email && (
-                    <div className="invalid-feedback">{errors.email}</div>
-                  )}
-                </Form.Group>
-                <Form.Group controlId="formBasicPassword">
-                  <Form.Label>Password</Form.Label>
-                  <Form.Control
-                    className={classnames({ "is-invalid": errors.password })}
-                    name="password"
-                    value={password}
-                    type="password"
-                    placeholder="Password"
-                    onChange={this.handleTitleChange}
-                  />
-                  {errors.password && (
-                    <div className="invalid-feedback">{errors.password}</div>
-                  )}
-                </Form.Group>
-                <Button variant="success" type="submit">
-                {isLoading ? 'Loading...' : "Submit"}
-                </Button>
-              </Form>
+            <Col className="my-top" md={4}>
+              <Card bg='light'>
+                <Form
+                  className="border border-secondary"
+                  onSubmit={this.handleFormSubmit}
+                  autoComplete="off"
+                  style={{
+                    padding: "2rem 1rem 1rem 1rem"
+                  }}>
+                  <Form.Group controlId="formBasicEmail" as={Col}>
+                    <Form.Control
+                      className={classnames({ "is-invalid": errors.email })}
+                      name="email"
+                      value={email}
+                      type="email"
+                      placeholder="Enter email"
+                      onChange={this.handleTitleChange}
+                    />
+                    {errors.email && (
+                      <div className="invalid-feedback">{errors.email}</div>
+                    )}
+                  </Form.Group>
+                  <Form.Group controlId="formBasicPassword" as={Col}>
+                    <Form.Control
+                      className={classnames({ "is-invalid": errors.password })}
+                      name="password"
+                      value={password}
+                      type="password"
+                      placeholder="Password"
+                      onChange={this.handleTitleChange}
+                    />
+                    {errors.password && (
+                      <div className="invalid-feedback">{errors.password}</div>
+                    )}
+                  </Form.Group>
+                  <Form.Group as={Col}>
+                    <Button
+                      className="btn-block"
+                      variant="success"
+                      type="submit"
+                      style={{ padding: ".5rem 1rem", marginTop: "1rem" }}>
+                      {isLoading ? (
+                        <div>
+                          <Spinner
+                            as="span"
+                            animation="border"
+                            size="sm"
+                            role="status"
+                            aria-hidden="true"
+                          />
+                          &nbsp; &nbsp; Loading...
+                        </div>
+                      ) : (
+                        "Submit"
+                      )}
+                    </Button>
+                  </Form.Group>
+                </Form>
+              </Card>
             </Col>
             <Col></Col>
           </Row>
@@ -110,17 +131,16 @@ class Login extends Component {
   }
 }
 
-
 Login.propTypes = {
   loginUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
-}
+};
 
-const mapStateToProps = ({auth, errors, isLoading}) => ({
+const mapStateToProps = ({ auth, errors, isLoading }) => ({
   auth,
   errors,
-  isLoading 
-})
+  isLoading
+});
 
-export default connect(mapStateToProps, {loginUser})(ReactTimeout(Login));
+export default connect(mapStateToProps, { loginUser })(ReactTimeout(Login));
