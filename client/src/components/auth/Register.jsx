@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
+import { withRouter } from "react-router";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
-// import axios from "axios";
 import classnames from "classnames";
 import { connect } from "react-redux";
 import { registerUser } from "../../redux/auth/auth.actions";
+// import LoadingButton from "../button/LoadingButton";
 
 class Register extends Component {
   state = {
@@ -12,7 +13,28 @@ class Register extends Component {
     email: "",
     password: "",
     password2: "",
+    isLoading: "",
     errors: {}
+  };
+
+  // static getDerivedStateFromProps(props, state) {
+  //   if (props.errors !== state.props) {
+  //     return {
+  //       ...state,
+  //       errors: props.errors,
+  //       isLoading: props.isLoading
+  //     }
+  //   }
+  //   return state
+  // }
+
+  UNSAFE_componentWillReceiveProps = nextProps => {
+    if (nextProps.errors && nextProps.isLoading) {
+      this.setState({
+        errors: nextProps.errors,
+        isLoading: nextProps.isLoading
+      });
+    }
   };
 
   handleTitleChange = ({ target: { name, value } }) => {
@@ -27,29 +49,24 @@ class Register extends Component {
       name: this.state.name,
       email: this.state.email,
       password: this.state.password,
-      password2: this.state.password2
+      password2: this.state.password2,
+      isLoading: this.state.isLoading
     };
 
-    // axios
-    //   .post("/api/users/register", newUser)
-    //   .then(res => console.log(res.data))
-    //   .catch(err => this.setState({ errors: err.response.data }));
-
-    this.props.registerUser(newUser)
-
+    this.props.registerUser(newUser, this.props.history);
   };
 
   render() {
-    const { name, email, password, password2, errors } = this.state;
-    const { user } = this.props.auth
+    const { name, email, password, password2, errors, isLoading } = this.state;
     return (
       <div className="register">
         <Container className="h-100">
           <Row className="h-100">
             <Col></Col>
-            <Col className="my-auto" lg={5}
-              style={{border: '2px solid lightgrey', padding: '2rem'}}
-            >
+            <Col
+              className="my-auto"
+              md={5}
+              style={{ border: "2px solid lightgrey", padding: "2rem" }}>
               <Form onSubmit={this.handleFormSubmit}>
                 <div className="text-center" style={{ marginBottom: "1rem" }}>
                   <h3 style={{ fontWeight: 700 }}>Don't have an account?</h3>
@@ -62,7 +79,7 @@ class Register extends Component {
                   </h5>
                 </div>
                 <Form.Group controlId="formBasicName" as={Col} md="12">
-                  <Form.Label>Name</Form.Label >
+                  <Form.Label>Name</Form.Label>
                   <Form.Control
                     className={classnames({ "is-invalid": errors.name })}
                     name="name"
@@ -117,10 +134,11 @@ class Register extends Component {
                     <div className="invalid-feedback">{errors.password2}</div>
                   )}
                 </Form.Group>
-                <Button variant="success" type="submit"
-                  style={{marginLeft: '1rem'}}
-                >
-                  Submit
+                <Button
+                  variant="success"
+                  type="submit"
+                  style={{ marginLeft: "1rem" }}>
+                  {isLoading ? 'Loading...' : "Submit"}
                 </Button>
               </Form>
             </Col>
@@ -134,11 +152,15 @@ class Register extends Component {
 
 Register.propTypes = {
   registerUser: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired
+  // isLoading: PropTypes.bool.isRequired
 };
 
-const mapStateToProps = (state) => ({
-  auth: state.auth
-})
+const mapStateToProps = ({ auth, errors, isLoading }) => ({
+  auth,
+  errors,
+  isLoading
+});
 
-export default connect(mapStateToProps, {registerUser})(Register);
+export default connect(mapStateToProps, { registerUser })(withRouter(Register));

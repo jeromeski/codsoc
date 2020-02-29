@@ -1,20 +1,23 @@
-import { TEST_DISPATCH } from "./auth.types";
+import { SET_CURRENT_USER } from "./auth.types";
+import isEmpty from "../../validation/is-empty";
 
 const INITIAL_STATE = {
   isAuthenticated: false,
   user: {}
-}
+};
 
-const authReducer = (state=INITIAL_STATE, actions) => {
-  switch(actions.type) {
-    case TEST_DISPATCH: 
+const authReducer = (state = INITIAL_STATE, action) => {
+  switch (action.type) {
+    case SET_CURRENT_USER:
       return {
         ...state,
-        user: actions.payload
-      }
+        isAuthenticated: !isEmpty(action.payload),
+        user: action.payload
+      };
 
-    default: return state
+    default:
+      return state;
   }
-}
+};
 
 export default authReducer;

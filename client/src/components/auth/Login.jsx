@@ -1,14 +1,27 @@
 import React, { Component } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
-import axios from "axios";
 import classnames from "classnames";
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import { loginUser } from '../../redux/auth/auth.actions';
 
 class Login extends Component {
   state = {
     email: "",
     password: "",
+    isLoading: '',
     errors: {}
   };
+
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    if(nextProps.auth.isAuthenticated) {
+      this.props.history.push('/dashboard');
+    }
+
+    if(nextProps.errors) {
+      this.setState({errors: nextProps.errors});
+    }
+  }
 
   handleTitleChange = ({ target: { name, value } }) => {
     this.setState({
@@ -16,27 +29,23 @@ class Login extends Component {
     });
   };
 
-  handleFormSubmit = evt => {
-    evt.preventDefault();
-    const currentUser = {
+  handleFormSubmit = () => {
+    const userData     = {
       email: this.state.email,
-      password: this.state.password
-    };
-
-    axios
-      .post("/api/users/login", currentUser)
-      .then(res => console.log(res.data))
-      .catch(err => this.setState({ errors: err.response.data }));
+      password: this.state.password,
+      isLoading: this.state.isLoading
+    }
+    this.props.loginUser(userData);
   };
 
   render() {
-    const { email, password, errors } = this.state;
+    const { email, password, errors, isLoading } = this.state;
     return (
       <div className="register">
         <Container className="h-100">
           <Row className="h-100">
             <Col></Col>
-            <Col className="my-auto" xs={5} 
+            <Col className="my-auto" lg={5} 
               style={{border: '2px solid lightgrey', padding: '2rem'}}>
               <Form onSubmit={this.handleFormSubmit}>
                 <div className="text-center" style={{ marginBottom: "1rem" }}>
@@ -78,7 +87,7 @@ class Login extends Component {
                   )}
                 </Form.Group>
                 <Button variant="success" type="submit">
-                  Submit
+                {isLoading ? 'Loading...' : "Submit"}
                 </Button>
               </Form>
             </Col>
@@ -90,4 +99,17 @@ class Login extends Component {
   }
 }
 
-export default Login;
+
+Login.propTypes = {
+  loginUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired
+}
+
+const mapStateToProps = ({auth, errors, isLoading}) => ({
+  auth,
+  errors,
+  isLoading 
+})
+
+export default connect(mapStateToProps, {loginUser})(Login);

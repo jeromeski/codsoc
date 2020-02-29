@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { withRouter } from "react-router";
 
