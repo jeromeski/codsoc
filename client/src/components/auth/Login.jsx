@@ -53,18 +53,21 @@ class Login extends Component {
     return (
       <div className="register">
         <Container className="h-100">
-          <Row className="h-25">
+          <Row className="h-45">
             <Col
-              className="my-bottom text-center"
-              style={{ marginBottom: 0, marginTop: "10%" }}>
+              className="text-center"
+              style={{ marginBottom: 0, marginTop: "20%" }}
+              >
               <h3 style={{ fontWeight: 700 }}>Sign in and stay updated.</h3>
-              <h5 style={{}}>Enter your email & password</h5>
+              <h5>Enter your email & password</h5>
             </Col>
           </Row>
-          <Row className="h-75">
+          <Row className="h-55">
             <Col></Col>
-            <Col className="my-top" md={4}>
-              <Card bg='light'>
+            <Col md={4}>
+              <Card bg='light'
+                style={{marginTop: '2rem'}}
+              >
                 <Form
                   className="border border-secondary"
                   onSubmit={this.handleFormSubmit}

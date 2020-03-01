@@ -71,14 +71,15 @@ class Register extends Component {
           <Row className="h-25">
             <Col
               className="text-center"
-              style={{ marginBottom: 0, marginTop: "100px" }}>
+              style={{ marginBottom: 0, marginTop: "100px" }}
+              >
               <h1 className="font-weight-bolder">Code Society</h1>
-              <h3>Network with the world's coding professionals</h3>
+              <h3>Connect with the world's Coding Developers</h3>
             </Col>
           </Row>
           <Row className="h-75">
             <Col></Col>
-            <Col className="my-top" md={4} style={{ paddingTop: "2rem" }}>
+            <Col md={4} style={{ marginTop: "2rem" }}>
               <Card bg='light' className="border border-secondary">
                 <Form
                   onSubmit={this.handleFormSubmit}
