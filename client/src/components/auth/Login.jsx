@@ -14,6 +14,12 @@ class Login extends Component {
     errors: {}
   };
 
+  componentDidMount() {
+    if(this.props.auth.isAuthenticated) {
+      this.props.history.push('/dashboard')
+    }
+  }
+
   UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.auth.isAuthenticated) {
       this.props.history.push("/dashboard");
@@ -52,17 +58,18 @@ class Login extends Component {
     const { email, password, errors, isLoading } = this.state;
     return (
       <div className="register">
-        <Container className="h-100">
-          <Row className="h-45">
+        <Container 
+          className="h-100">
+          <Row className="h-25 align-items-end">
             <Col
               className="text-center"
-              style={{ marginBottom: 0, marginTop: "20%" }}
+              // style={{ marginBottom: 0, marginTop: "20%" }}
               >
-              <h3 style={{ fontWeight: 700 }}>Sign in and stay updated.</h3>
-              <h5>Enter your email & password</h5>
+              <h2 style={{ fontWeight: 700 }}>Sign in and stay updated</h2>
+              <h4 className='mb-0'>Enter your email & password</h4>
             </Col>
           </Row>
-          <Row className="h-55">
+          <Row className="h-75 align-items-start">
             <Col></Col>
             <Col md={4}>
               <Card bg='light'

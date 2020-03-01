@@ -8,7 +8,7 @@ import { Container } from 'react-bootstrap';
 
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
-import { setCurrentUser } from './redux/auth/auth.actions';
+import { setCurrentUser, logoutUser } from './redux/auth/auth.actions';
 import setAuthToken from './utils/setAuthToken';
 import store from "./redux/store";
 
@@ -17,9 +17,20 @@ if(localStorage.jwtToken) {
   // Set auth token header auth
   setAuthToken(localStorage.jwtToken);
   // Decode token and get user info and exp
-  const decode = jwt_decode(localStorage.jwtToken);
+  const decoded = jwt_decode(localStorage.jwtToken);
   // Set user and isAuthenticated
-  store.dispatch(setCurrentUser(decode));
+  store.dispatch(setCurrentUser(decoded));
+
+  // Check for expired token
+  const currentTime = Date.now() / 1000;
+  if (decoded.exp < currentTime) {
+    // Logout user
+    store.dispatch(logoutUser());
+    // Clear current Profile
+    // Redirect login
+    window.location.href = './login'
+  }
+  
 }
 
 const App = () => {

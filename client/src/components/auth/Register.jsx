@@ -1,7 +1,15 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router";
-import { Container, Row, Col, Form, Button, Spinner, Card } from "react-bootstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Form,
+  Button,
+  Spinner,
+  Card
+} from "react-bootstrap";
 import classnames from "classnames";
 import { connect } from "react-redux";
 import { registerUser } from "../../redux/auth/auth.actions";
@@ -29,6 +37,12 @@ class Register extends Component {
   //   }
   //   return state
   // }
+
+  componentDidMount() {
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push("/dashboard");
+    }
+  }
 
   UNSAFE_componentWillReceiveProps = nextProps => {
     if (nextProps.errors) {
@@ -68,24 +82,22 @@ class Register extends Component {
     return (
       <div className="register">
         <Container className="h-100">
-          <Row className="h-25">
-            <Col
-              className="text-center"
-              style={{ marginBottom: 0, marginTop: "100px" }}
-              >
-              <h1 className="font-weight-bolder">Code Society</h1>
-              <h3>Connect with the world's Coding Developers</h3>
-            </Col>
-          </Row>
-          <Row className="h-75">
-            <Col></Col>
-            <Col md={4} style={{ marginTop: "2rem" }}>
-              <Card bg='light' className="border border-secondary">
+          <Row className="h-100 align-items-center justify-content-center">
+            <Col md={8} className="text-center mb-3">
+              <h1 className="font-weight-bolder mb-0">Coders Society</h1>
+              <h3 className='mb-3'>Connect with the world's Developers</h3>
+              <Card
+                bg="light"
+                className="border border-secondary"
+                as={Col}
+                xs={12} md={{span: 8, offset: 2}} lg={{span: 6, offset: 3}}
+                >
                 <Form
+                  as={Col}
                   onSubmit={this.handleFormSubmit}
                   autoComplete="off"
                   style={{ padding: "2rem 1rem  1rem 1rem" }}>
-                  <Form.Group controlId="formBasicName" as={Col}>
+                  <Form.Group controlId="formBasicName">
                     <Form.Control
                       className={classnames({ "is-invalid": errors.name })}
                       name="name"
@@ -98,7 +110,7 @@ class Register extends Component {
                       <div className="invalid-feedback">{errors.name}</div>
                     )}
                   </Form.Group>
-                  <Form.Group controlId="formBasicEmail" as={Col}>
+                  <Form.Group controlId="formBasicEmail">
                     <Form.Control
                       className={classnames({ "is-invalid": errors.email })}
                       name="email"
@@ -111,7 +123,7 @@ class Register extends Component {
                       <div className="invalid-feedback">{errors.email}</div>
                     )}
                   </Form.Group>
-                  <Form.Group controlId="formBasicPassword" as={Col}>
+                  <Form.Group controlId="formBasicPassword">
                     <Form.Control
                       className={classnames({ "is-invalid": errors.password })}
                       name="password"
@@ -124,7 +136,7 @@ class Register extends Component {
                       <div className="invalid-feedback">{errors.password}</div>
                     )}
                   </Form.Group>
-                  <Form.Group controlId="formBasicPassword2" as={Col}>
+                  <Form.Group controlId="formBasicPassword2">
                     <Form.Control
                       className={classnames({ "is-invalid": errors.password2 })}
                       name="password2"
@@ -137,7 +149,7 @@ class Register extends Component {
                       <div className="invalid-feedback">{errors.password2}</div>
                     )}
                   </Form.Group>
-                  <Form.Group as={Col}>
+                  <Form.Group>
                     <Button
                       className="btn-block"
                       variant="success"
@@ -162,7 +174,6 @@ class Register extends Component {
                 </Form>
               </Card>
             </Col>
-            <Col></Col>
           </Row>
         </Container>
       </div>
