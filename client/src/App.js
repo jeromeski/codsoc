@@ -12,6 +12,7 @@ import { setCurrentUser, logoutUser } from './redux/auth/auth.actions';
 import setAuthToken from './utils/setAuthToken';
 import store from "./redux/store";
 import Dashboard from './components/dashboard/Dashboard';
+import { clearCurrentProfile } from './redux/profile/profile.actions';
 
 
 // Check for token
@@ -29,6 +30,7 @@ if(localStorage.jwtToken) {
     // Logout user
     store.dispatch(logoutUser());
     // Clear current Profile
+    store.dispatch(clearCurrentProfile());
     // Redirect login
     window.location.href = './login'
   }

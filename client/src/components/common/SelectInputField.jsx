@@ -1,5 +1,5 @@
 import React from "react";
-import classnames from "classnames";
+// import classnames from "classnames";
 import PropTypes from "prop-types";
 import { Col, Form } from "react-bootstrap";
 
@@ -33,7 +33,6 @@ const SelectInputField = ({
 SelectInputField.propTypes = {
   info: PropTypes.string,
   error: PropTypes.string,
-  onChange: PropTypes.func.isRequired,
   disabled: PropTypes.string,
   controlId: PropTypes.string
 };

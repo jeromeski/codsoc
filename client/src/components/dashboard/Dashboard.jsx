@@ -1,30 +1,32 @@
 import React, { Component } from "react";
-
+import PropTypes from "prop-types";
 import { Container, Row, Col, Button, Form, FormGroup } from "react-bootstrap";
 import TextInputField from "../common/TextInputField";
 import SelectInputField from "../common/SelectInputField";
 import { connect } from "react-redux";
 import TextAreaField from "../common/TextAreaField";
 import SocialMediaInputField from "../common/SocialMediaInputField";
+import { getCurrentProfile } from "../../redux/profile/profile.actions";
 
 class Dashboard extends Component {
+  componentDidMount() {
+    this.props.getCurrentProfile();
+  }
 
-  
   render() {
-    const { name, errors, isLoading } = this.props;
+    const { name, errors } = this.props;
     return (
       <div className="create-profile">
         <Container className="h-100 justify-content-center">
           <Row className="h-100 main">
             <Col
-              // className='m-auto'
+              // className='my-auto'
               xs={12}
               md={{ span: 6, offset: 3 }}
               lg={{ span: 6, offset: 3 }}
-              style={{ marginTop: "7rem" }}>
-              <Button
-              variant="secondary"
-              >Go back</Button>
+              style={{ marginTop: "7rem", marginBottom: "5rem" }}
+              >
+              <Button variant="secondary">Go back</Button>
 
               <h1 className="display-4 text-center mb-0">Basic Profile</h1>
               <h4 className="text-center mb-4">
@@ -42,10 +44,10 @@ class Dashboard extends Component {
                   placeholder="Enter your profile handle"
                   onChange={this.handleTitleChange}
                   error={errors.name}
-                  info={'A unique handle for your profile URL'}
+                  info={"A unique handle for your profile URL"}
                 />
-                <SelectInputField 
-                info={'Give us an idea of where you are in your career'}
+                <SelectInputField
+                  info={"Give us an idea of where you are in your career"}
                 />
                 <TextInputField
                   controlId="formBasicCompany"
@@ -54,8 +56,7 @@ class Dashboard extends Component {
                   type="text"
                   placeholder="Company"
                   onChange={this.handleTitleChange}
-                  
-                  info={'Company you are working for'}
+                  info={"Company you are working for"}
                 />
                 <TextInputField
                   controlId="formBasicLocation"
@@ -64,8 +65,7 @@ class Dashboard extends Component {
                   type="text"
                   placeholder="Your location"
                   onChange={this.handleTitleChange}
-                  
-                  info={'City & state (eg. Boston, MA)'}
+                  info={"City & state (eg. Boston, MA)"}
                 />
                 <TextInputField
                   controlId="formBasicSkills"
@@ -74,13 +74,14 @@ class Dashboard extends Component {
                   type="text"
                   placeholder="Skills"
                   onChange={this.handleTitleChange}
-                  
-                  info={'Please use comma separated values (eg. HTML,CSS,JavaScript,PHP)'}
+                  info={
+                    "Please use comma separated values (eg. HTML,CSS,JavaScript,PHP)"
+                  }
                 />
                 <TextAreaField
                   controlId="formBasicTextArea"
                   placeholder="Enter some text here"
-                  info={'Tell us a little about yourself'}
+                  info={"Tell us a little about yourself"}
                 />
                 <FormGroup className="mt-4" as={Col}>
                   <Button variant="secondary">Add Social Network Links</Button>
@@ -139,10 +140,14 @@ class Dashboard extends Component {
   }
 }
 
-const mapStateToProps = ({ auth, errors, isLoading }) => ({
+Dashboard.propTypes = {
+  getCurrentProfile: PropTypes.func.isRequired
+};
+
+const mapStateToProps = ({ auth, errors, profile }) => ({
   auth,
   errors,
-  isLoading
+  profile
 });
 
-export default connect(mapStateToProps, null)(Dashboard);
+export default connect(mapStateToProps, {getCurrentProfile})(Dashboard);
