@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
-import { withRouter } from "react-router";
 import { connect } from "react-redux";
 
 class Landing extends Component {
@@ -12,7 +11,7 @@ class Landing extends Component {
   }
 
   // To solve 'history', no-restricted-globals
-  nextPath(path) {
+  handleLogin(path) {
     this.props.history.push(path);
   }
 
@@ -20,8 +19,8 @@ class Landing extends Component {
     return (
       <div className="masthead">
         <Container className="h-100">
-          <Row className="align-items-center justify-content-center text-center h-100">
-            <Col className="my-auto heading__primary" sm={12}>
+          <Row className="h-100 align-items-center justify-content-center">
+            <Col className='text-center'>
               <h1 className="text-light" style={{ fontSize: "4rem" }}>
                 Coders Society
               </h1>
@@ -32,10 +31,10 @@ class Landing extends Component {
               </h3>
               <Button
                 style={{ marginRight: ".5rem" }}
-                onClick={ () => this.nextPath('/register')}>
+                onClick={ () => this.handleLogin('/register')}>
                 Sign up
               </Button>
-              <Button variant="light" onClick={ () => this.nextPath('/login')}>
+              <Button variant="light" onClick={ () => this.handleLogin('/login')}>
                 Log in
               </Button>
             </Col>

@@ -1,10 +1,18 @@
 import React, { Component } from "react";
-import { Container, Row, Col, Form, Button, Spinner, Card } from "react-bootstrap";
-import classnames from "classnames";
+import {
+  Container,
+  Row,
+  Col,
+  Form,
+  Button,
+  Spinner,
+  Card
+} from "react-bootstrap";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { loginUser } from "../../redux/auth/auth.actions";
 import ReactTimeout from "react-timeout";
+import TextInputField from "../common/TextInputField";
 
 class Login extends Component {
   state = {
@@ -15,8 +23,8 @@ class Login extends Component {
   };
 
   componentDidMount() {
-    if(this.props.auth.isAuthenticated) {
-      this.props.history.push('/dashboard')
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push("/dashboard");
     }
   }
 
@@ -34,7 +42,7 @@ class Login extends Component {
         this.setState({
           isLoading: false
         });
-      }, 2000);
+      }, 1000);
     }
   }
 
@@ -58,56 +66,46 @@ class Login extends Component {
     const { email, password, errors, isLoading } = this.state;
     return (
       <div className="register">
-        <Container 
-          className="h-100">
-          <Row className="h-25 align-items-end">
+        <Container className="h-100">
+          <Row className="h-100 align-items-center justify-content-center">
             <Col
               className="text-center"
-              // style={{ marginBottom: 0, marginTop: "20%" }}
-              >
-              <h2 style={{ fontWeight: 700 }}>Sign in and stay updated</h2>
-              <h4 className='mb-0'>Enter your email & password</h4>
-            </Col>
-          </Row>
-          <Row className="h-75 align-items-start">
-            <Col></Col>
-            <Col md={4}>
-              <Card bg='light'
-                style={{marginTop: '2rem'}}
-              >
+            >
+              <h2 className="font-weight-bolder">
+                Sign in and stay updated
+              </h2>
+              <h4 className="mb-4">Enter your email & password</h4>
+              <Card
+                className="border border-secondary"
+                bg="light"
+                as={Col}
+                xs={12}
+                md={{ span: 6, offset: 3 }}
+                lg={{ span: 4, offset: 4 }}>
                 <Form
-                  className="border border-secondary"
                   onSubmit={this.handleFormSubmit}
                   autoComplete="off"
                   style={{
-                    padding: "2rem 1rem 1rem 1rem"
+                    padding: "2rem 0 1rem 0"
                   }}>
-                  <Form.Group controlId="formBasicEmail" as={Col}>
-                    <Form.Control
-                      className={classnames({ "is-invalid": errors.email })}
-                      name="email"
-                      value={email}
-                      type="email"
-                      placeholder="Enter email"
-                      onChange={this.handleTitleChange}
-                    />
-                    {errors.email && (
-                      <div className="invalid-feedback">{errors.email}</div>
-                    )}
-                  </Form.Group>
-                  <Form.Group controlId="formBasicPassword" as={Col}>
-                    <Form.Control
-                      className={classnames({ "is-invalid": errors.password })}
-                      name="password"
-                      value={password}
-                      type="password"
-                      placeholder="Password"
-                      onChange={this.handleTitleChange}
-                    />
-                    {errors.password && (
-                      <div className="invalid-feedback">{errors.password}</div>
-                    )}
-                  </Form.Group>
+                  <TextInputField
+                  controlId='formBasicEmail'
+                  name='email'
+                  value={email}
+                  type='text'
+                  placeholder='Enter Email'
+                  onChange={this.handleTitleChange}
+                  error={errors.email}
+                  />
+                  <TextInputField
+                  controlId='formBasicPassword2'
+                  name='password'
+                  value={password}
+                  type='password'
+                  placeholder='Password'
+                  onChange={this.handleTitleChange}
+                  error={errors.password}
+                  />
                   <Form.Group as={Col}>
                     <Button
                       className="btn-block"
@@ -133,7 +131,6 @@ class Login extends Component {
                 </Form>
               </Card>
             </Col>
-            <Col></Col>
           </Row>
         </Container>
       </div>
@@ -146,6 +143,7 @@ Login.propTypes = {
   auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
 };
+
 
 const mapStateToProps = ({ auth, errors, isLoading }) => ({
   auth,

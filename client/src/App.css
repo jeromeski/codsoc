@@ -37,3 +37,14 @@ html {
 .nav-link {
   display: inline-block
 }
+
+.dropdown-menu.show {
+  margin-top: 1rem !important;
+}
+
+.main {
+  /* height: 100vh; */
+  /* width: 100vw; */
+  /* background-color: lightblue !important; */
+}
+

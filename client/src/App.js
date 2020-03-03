@@ -11,6 +11,8 @@ import Login from './components/auth/Login';
 import { setCurrentUser, logoutUser } from './redux/auth/auth.actions';
 import setAuthToken from './utils/setAuthToken';
 import store from "./redux/store";
+import Dashboard from './components/dashboard/Dashboard';
+
 
 // Check for token
 if(localStorage.jwtToken) {
@@ -41,6 +43,7 @@ const App = () => {
       <Container>
         <Route path='/register' component={Register} />
         <Route path='/login' component={Login} />
+        <Route path='/dashboard' component={Dashboard} />
       </Container>
     </div>
   );
