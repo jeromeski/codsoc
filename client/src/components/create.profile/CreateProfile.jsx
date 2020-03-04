@@ -1,13 +1,16 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { Container, Row, Col, Button, Form } from "react-bootstrap";
 import TextInputField from "../common/TextInputField";
 import SelectListGroup from "../common/SelectListGroup";
 import TextAreaField from "../common/TextAreaField";
 import SocialMediaInputField from "../common/SocialMediaInputField";
-import { connect } from "react-redux";
+import { createProfile } from "../../redux/profile/profile.actions";
 
 class CreateProfile extends Component {
+
   state = {
     displaySocialInputs: false,
     handle: "",
@@ -26,15 +29,43 @@ class CreateProfile extends Component {
     errors: {}
   };
 
+  
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
+  }
+
+  onSubmit = (e) => {
+    e.preventDefault();
+
+    console.log('clicked')
+
+    const profileData = {
+      handle: this.state.handle,
+      company: this.state.company,
+      website: this.state.website,
+      location: this.state.location,
+      status: this.state.status,
+      skills: this.state.skills,
+      githubusername: this.state.githubusername,
+      bio: this.state.bio,
+      twitter: this.state.twitter,
+      facebook: this.state.facebook,
+      linkedin: this.state.linkedin,
+      youtube: this.state.youtube,
+      instagram: this.state.instagram
+    };
+
+    this.props.createProfile(profileData, this.props.history);
+  };
+
   handleTitleChange = ({ target: { name, value } }) => {
     this.setState({
       [name]: value
     });
   };
 
-  handleSubmit = evt => {
-    evt.preventDefaul();
-  };
 
   render() {
     const {
@@ -135,7 +166,6 @@ class CreateProfile extends Component {
         </div>
       );
     }
-
     return (
       <div>
         <Container className="h-100">
@@ -145,14 +175,13 @@ class CreateProfile extends Component {
               md={{ span: 6, offset: 3 }}
               lg={{ span: 6, offset: 3 }}
               style={{ marginTop: "7rem", marginBottom: "5rem" }}>
-              <Button variant="secondary">Go back</Button>
 
               <h1 className="display-4 text-center mb-0">Basic Profile</h1>
               <h4 className="text-center mb-4">
                 Let's make your profile stand out
               </h4>
 
-              <Form autoComplete="off" onSubmit={this.handleSubmit}>
+              <Form onSubmit={this.onSubmit} >
                 <TextInputField
                   controlId="formBasicName"
                   name="handle"
@@ -243,16 +272,17 @@ class CreateProfile extends Component {
                       }));
                     }}>
                     Add Social Network Links
-                  </Button>{' '}
-                  <span className='text-muted'>Optional</span>
+                  </Button>{" "}
+                  <span className="text-muted">Optional</span>
                 </Form.Group>
                 {socialInputs}
+
+                <Form.Group className="mt-4" as={Col}>
+                  <Button type='submit' className="btn-block" variant="success">
+                    Submit
+                  </Button>
+                </Form.Group>
               </Form>
-              <Form.Group className="mt-4" as={Col}>
-                <Button className="btn-block" variant="success">
-                  Submit
-                </Button>
-              </Form.Group>
             </Col>
           </Row>
         </Container>
@@ -263,7 +293,8 @@ class CreateProfile extends Component {
 
 CreateProfile.propTypes = {
   profile: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired
+  errors: PropTypes.object.isRequired,
+  // createProfile: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -271,4 +302,6 @@ const mapStateToProps = state => ({
   errors: state.errors
 });
 
-export default connect(mapStateToProps)(CreateProfile);
+export default connect(mapStateToProps, { createProfile })(
+  withRouter(CreateProfile)
+);
