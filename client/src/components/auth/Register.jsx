@@ -14,7 +14,11 @@ import { connect } from "react-redux";
 import { registerUser } from "../../redux/auth/auth.actions";
 import ReactTimeout from "react-timeout";
 import TextInputField from "../common/TextInputField";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { fab } from "@fortawesome/free-brands-svg-icons";
 
+library.add(fab);
 
 class Register extends Component {
   state = {
@@ -25,7 +29,6 @@ class Register extends Component {
     isLoading: "",
     errors: {}
   };
-
 
   componentDidMount() {
     if (this.props.auth.isAuthenticated) {
@@ -66,8 +69,6 @@ class Register extends Component {
     this.props.registerUser(newUser, this.props.history);
   };
 
-  
-
   render() {
     const { name, email, password, password2, errors, isLoading } = this.state;
     return (
@@ -76,54 +77,54 @@ class Register extends Component {
           <Row className="h-100 align-items-center justify-content-center">
             <Col className="text-center">
               <h1 className="font-weight-bolder mb-0">Coders Society</h1>
-              <h3 className='mb-3'>Connect with the world's Developers</h3>
+              <h3 className="mb-3">Connect with the world's Developers</h3>
               <Card
                 bg="light"
                 className="border border-secondary"
                 as={Col}
-                xs={12} md={{span: 6, offset: 3}} lg={{span: 4, offset: 4}}
-                >
+                xs={12}
+                md={{ span: 6, offset: 3 }}
+                lg={{ span: 4, offset: 4 }}>
                 <Form
                   onSubmit={this.handleFormSubmit}
                   autoComplete="off"
-                  style={{ padding: "2rem 0  1rem 0" }}
-                  >
+                  style={{ padding: "2rem 0  1rem 0" }}>
                   <TextInputField
-                  controlId='formBasicName'
-                  name='name'
-                  value={name}
-                  type='text'
-                  placeholder='Enter name'
-                  onChange={this.handleTitleChange}
-                  error={errors.name}
+                    controlId="formBasicName"
+                    name="name"
+                    value={name}
+                    type="text"
+                    placeholder="Enter name"
+                    onChange={this.handleTitleChange}
+                    error={errors.name}
                   />
                   <TextInputField
-                  controlId='formBasicEmail'
-                  name='email'
-                  value={email}
-                  type='text'
-                  placeholder='Enter email'
-                  onChange={this.handleTitleChange}
-                  error={errors.email}
-                  info={'Gravatar images will be used as your avatar'}
+                    controlId="formBasicEmail"
+                    name="email"
+                    value={email}
+                    type="text"
+                    placeholder="Enter email"
+                    onChange={this.handleTitleChange}
+                    error={errors.email}
+                    info={"Gravatar images will be used as your avatar"}
                   />
                   <TextInputField
-                  controlId='formBasicPassword'
-                  name='password'
-                  value={password}
-                  type='password'
-                  placeholder='Password'
-                  onChange={this.handleTitleChange}
-                  error={errors.password}
+                    controlId="formBasicPassword"
+                    name="password"
+                    value={password}
+                    type="password"
+                    placeholder="Password"
+                    onChange={this.handleTitleChange}
+                    error={errors.password}
                   />
                   <TextInputField
-                  controlId='formBasicPassword2'
-                  name='password2'
-                  value={password2}
-                  type='password'
-                  placeholder='Confirm password'
-                  onChange={this.handleTitleChange}
-                  error={errors.password2}
+                    controlId="formBasicPassword2"
+                    name="password2"
+                    value={password2}
+                    type="password"
+                    placeholder="Confirm password"
+                    onChange={this.handleTitleChange}
+                    error={errors.password2}
                   />
                   <Form.Group as={Col}>
                     <Button
@@ -143,8 +144,21 @@ class Register extends Component {
                           &nbsp; &nbsp; Loading...
                         </div>
                       ) : (
-                        "I agree to the Terms & Conditions"
+                        "Submit"
                       )}
+                    </Button>
+                  </Form.Group> 
+                  <span className='text-muted' >or Register with</span>
+                  <Form.Group as={Col}
+                   className='mt-0'
+                  >
+                    <Button
+                      className='btn-block'
+                      variant='danger'
+                      style={{ padding: ".5rem 1rem", marginTop: "1rem" }}
+                      >
+                      <FontAwesomeIcon icon={["fab", "google"]} />
+                      {' '}Google
                     </Button>
                   </Form.Group>
                 </Form>
@@ -165,8 +179,8 @@ Register.propTypes = {
 };
 
 TextInputField.defaultProps = {
-  type: 'text',
-}
+  type: "text"
+};
 
 const mapStateToProps = ({ auth, errors, isLoading }) => ({
   auth,
