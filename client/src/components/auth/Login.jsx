@@ -84,7 +84,6 @@ class Login extends Component {
                 lg={{ span: 4, offset: 4 }}>
                 <Form
                   onSubmit={this.handleFormSubmit}
-                  autoComplete="off"
                   style={{
                     padding: "2rem 0 1rem 0"
                   }}>
@@ -98,7 +97,8 @@ class Login extends Component {
                   error={errors.email}
                   />
                   <TextInputField
-                  controlId='formBasicPassword2'
+                  controlId='formBasicPassword'
+                  autoComplete='current-password'
                   name='password'
                   value={password}
                   type='password'

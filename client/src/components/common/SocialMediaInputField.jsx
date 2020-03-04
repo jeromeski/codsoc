@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { far } from "@fortawesome/free-regular-svg-icons";
@@ -10,7 +11,6 @@ import {
   FormControl,
   FormGroup
 } from "react-bootstrap";
-// import FormCheckLabel from "react-bootstrap/FormCheckLabel";
 
 library.add(far, fas, fab);
 
@@ -23,7 +23,9 @@ const SocialMediaInputField = ({
   type,
   placeholder,
   ariaLabel,
-  ariaDescribedby
+  ariaDescribedby,
+  error,
+  name
 }) => {
   return (
     <FormGroup>
@@ -34,14 +36,27 @@ const SocialMediaInputField = ({
           </InputGroup.Text>
         </InputGroup.Prepend>
         <FormControl
+          name={name}
           type={type}
           placeholder={placeholder}
           aria-label={ariaLabel}
           aria-describedby={ariaDescribedby}
         />
+        {error && <div className="invalid-feedback">{error}</div>}
       </InputGroup>
     </FormGroup>
   );
+};
+
+
+SocialMediaInputField.propTypes = {
+  name: PropTypes.string.isRequired,
+  placeholder: PropTypes.string,
+  value: PropTypes.string.isRequired,
+  icon: PropTypes.array,
+  error: PropTypes.string,
+  onChange: PropTypes.func.isRequired,
+  id: PropTypes.string
 };
 
 export default SocialMediaInputField;

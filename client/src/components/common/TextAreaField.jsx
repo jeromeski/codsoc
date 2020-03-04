@@ -1,21 +1,41 @@
 import React from "react";
 import { Form, Col } from "react-bootstrap";
+import PropTypes from "prop-types";
 
 const TextAreaField = ({
+  name,
+  value,
   placeholder,
+  onChange,
+  error,
   info,
-  onChange
+  controlId,
 }) => {
   return (
-    <Form.Group controlId="exampleForm.ControlTextarea1" as={Col}>
+    <Form.Group controlId={controlId} as={Col}>
       <Form.Control 
         as="textarea" 
-        rows="3"
-        placeholder={placeholder} 
+        rows="3" 
+        name={name}
+        value={value}
+        placeholder={placeholder}
+        onChange={onChange}
+        error={error}
       />
-      {info && <small className="form-text text-muted">{info}</small>}
+      {info && <small className='form-text text-muted'>{info}</small>}
+      {error && <div className="invalid-feedback">{error}</div>}
     </Form.Group>
   );
+};
+
+TextAreaField.propTypes = {
+  name: PropTypes.string.isRequired,
+  placeholder: PropTypes.string,
+  value: PropTypes.string.isRequired,
+  info: PropTypes.string,
+  error: PropTypes.string,
+  onChange: PropTypes.func.isRequired,
+  controlId: PropTypes.string
 };
 
 export default TextAreaField;

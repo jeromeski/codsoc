@@ -14,6 +14,7 @@ import store from "./redux/store";
 import Dashboard from "./components/dashboard/Dashboard";
 import { clearCurrentProfile } from "./redux/profile/profile.actions";
 import PrivateRoute from "./components/common/PrivateRoute";
+import CreateProfile from "./components/create.profile/CreateProfile";
 
 // Check for token
 if (localStorage.jwtToken) {
@@ -45,8 +46,8 @@ const App = () => {
         <Route path="/register" component={Register} />
         <Route path="/login" component={Login} />
         <Switch>
-          <PrivateRoute path="/dashboard" component={Dashboard}>
-          </PrivateRoute>
+          <PrivateRoute path="/dashboard" component={Dashboard}/>
+          <PrivateRoute path="/create-profile" component={CreateProfile}/>
         </Switch>
       </Container>
     </div>
