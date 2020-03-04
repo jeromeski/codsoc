@@ -1,32 +1,98 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Container, Row, Col, Button, Form, FormGroup } from "react-bootstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Button,
+  Form,
+  FormGroup,
+  NavLink
+} from "react-bootstrap";
 import TextInputField from "../common/TextInputField";
 import SelectInputField from "../common/SelectInputField";
 import { connect } from "react-redux";
 import TextAreaField from "../common/TextAreaField";
 import SocialMediaInputField from "../common/SocialMediaInputField";
 import { getCurrentProfile } from "../../redux/profile/profile.actions";
+import SpinnerComponent from "../common/Spinner";
 
 class Dashboard extends Component {
+  // state = {
+  //   name: '',
+  //   locality: '',
+  //   skills: '',
+  //   company: ''
+  //   }
+
   componentDidMount() {
     this.props.getCurrentProfile();
   }
 
+  handleTitleChange = ({ target: { name, value } }) => {
+    this.setState({
+      [name]: value
+    });
+  };
   render() {
-    const { name, errors } = this.props;
+    // const { name, skills, locality, company } = this.state
+    const { profile, loading } = this.props.profile;
+    const { user } = this.props.auth;
+
+    let dashboardContent;
+
+    if (profile === null || loading) {
+      dashboardContent = <SpinnerComponent />;
+    } else {
+      if (Object.keys(profile).length > 0) {
+        dashboardContent = <h4>TODO: Display Profile</h4>;
+      } else {
+        dashboardContent = (
+          <div
+            style={{marginTop: '10rem'}}
+          >
+            <p className="lead text-muted">Welcome <span className='h4'> {user.name} </span>, </p>
+            <p className="lead text-muted">You have not yet setup a profile, please add some info.</p>
+            <Button
+              className='mt-4'
+              onClick={() => console.log("clicked")}>Create Profile</Button>
+          </div>
+        );
+      }
+    }
+
     return (
       <div className="create-profile">
-        <Container className="h-100 justify-content-center">
-          <Row className="h-100 main">
-            <Col
+        <Container className="h-100">
+          <Row className="h-100 main">{dashboardContent}</Row>
+        </Container>
+      </div>
+    );
+  }
+}
+
+Dashboard.propTypes = {
+  getCurrentProfile: PropTypes.func.isRequired
+};
+
+const mapStateToProps = ({ auth, profile }) => ({
+  auth,
+  profile
+});
+
+export default connect(mapStateToProps, { getCurrentProfile })(Dashboard);
+
+/*
+
+<Col
               // className='my-auto'
               xs={12}
               md={{ span: 6, offset: 3 }}
               lg={{ span: 6, offset: 3 }}
               style={{ marginTop: "7rem", marginBottom: "5rem" }}
               >
-              <Button variant="secondary">Go back</Button>
+              
+            <Button variant="secondary">Go back</Button>
 
               <h1 className="display-4 text-center mb-0">Basic Profile</h1>
               <h4 className="text-center mb-4">
@@ -43,7 +109,6 @@ class Dashboard extends Component {
                   type="text"
                   placeholder="Enter your profile handle"
                   onChange={this.handleTitleChange}
-                  error={errors.name}
                   info={"A unique handle for your profile URL"}
                 />
                 <SelectInputField
@@ -52,7 +117,7 @@ class Dashboard extends Component {
                 <TextInputField
                   controlId="formBasicCompany"
                   name="company"
-                  value={name}
+                  value={company}
                   type="text"
                   placeholder="Company"
                   onChange={this.handleTitleChange}
@@ -60,8 +125,8 @@ class Dashboard extends Component {
                 />
                 <TextInputField
                   controlId="formBasicLocation"
-                  name="location"
-                  value={name}
+                  name="locality"
+                  value={locality}
                   type="text"
                   placeholder="Your location"
                   onChange={this.handleTitleChange}
@@ -70,7 +135,7 @@ class Dashboard extends Component {
                 <TextInputField
                   controlId="formBasicSkills"
                   name="skills"
-                  value={name}
+                  value={skills}
                   type="text"
                   placeholder="Skills"
                   onChange={this.handleTitleChange}
@@ -133,21 +198,4 @@ class Dashboard extends Component {
                 </Button>
               </FormGroup>
             </Col>
-          </Row>
-        </Container>
-      </div>
-    );
-  }
-}
-
-Dashboard.propTypes = {
-  getCurrentProfile: PropTypes.func.isRequired
-};
-
-const mapStateToProps = ({ auth, errors, profile }) => ({
-  auth,
-  errors,
-  profile
-});
-
-export default connect(mapStateToProps, {getCurrentProfile})(Dashboard);
+*/
