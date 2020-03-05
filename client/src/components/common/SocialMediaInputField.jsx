@@ -16,7 +16,9 @@ const SocialMediaInputField = ({
   ariaLabel,
   ariaDescribedby,
   error,
-  name
+  name,
+  value,
+  onChange
 }) => {
   return (
     <FormGroup>
@@ -32,6 +34,8 @@ const SocialMediaInputField = ({
           placeholder={placeholder}
           aria-label={ariaLabel}
           aria-describedby={ariaDescribedby}
+          value={value}
+          onChange={onChange}
         />
         {error && <div className="invalid-feedback">{error}</div>}
       </InputGroup>
@@ -43,7 +47,7 @@ const SocialMediaInputField = ({
 SocialMediaInputField.propTypes = {
   name: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
-  value: PropTypes.string.isRequired,
+  value: PropTypes.string,
   icon: PropTypes.string,
   error: PropTypes.string,
   onChange: PropTypes.func.isRequired,

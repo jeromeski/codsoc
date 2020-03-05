@@ -10,7 +10,6 @@ import SocialMediaInputField from "../common/SocialMediaInputField";
 import { createProfile } from "../../redux/profile/profile.actions";
 
 class CreateProfile extends Component {
-
   state = {
     displaySocialInputs: false,
     handle: "",
@@ -29,17 +28,14 @@ class CreateProfile extends Component {
     errors: {}
   };
 
-  
   UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
     }
   }
 
-  onSubmit = (e) => {
+  onSubmit = e => {
     e.preventDefault();
-
-    console.log('clicked')
 
     const profileData = {
       handle: this.state.handle,
@@ -65,7 +61,6 @@ class CreateProfile extends Component {
       [name]: value
     });
   };
-
 
   render() {
     const {
@@ -108,7 +103,7 @@ class CreateProfile extends Component {
             type="text"
             value={twitter}
             placeholder="twitter"
-            icon='fab fa-twitter'
+            icon="fab fa-twitter"
             id="input-social1"
             ariaLabel="twitter"
             ariaDescribedby="input-social1"
@@ -120,7 +115,7 @@ class CreateProfile extends Component {
             type="text"
             value={facebook}
             placeholder="facebook"
-            icon='fab fa-facebook-f'
+            icon="fab fa-facebook-f"
             id="input-social2"
             ariaLabel="facebook"
             ariaDescribedby="input-social2"
@@ -132,8 +127,7 @@ class CreateProfile extends Component {
             type="text"
             value={instagram}
             placeholder="instagram"
-            
-            icon='fab fa-instagram'
+            icon="fab fa-instagram"
             id="input-social3"
             ariaLabel="instagram"
             ariaDescribedby="input-social3"
@@ -145,7 +139,7 @@ class CreateProfile extends Component {
             type="text"
             value={linkedin}
             placeholder="linkedin"
-            icon='fab fa-linkedin'
+            icon="fab fa-linkedin"
             id="input-social4"
             ariaLabel="linkedin"
             ariaDescribedby="input-social4"
@@ -157,7 +151,7 @@ class CreateProfile extends Component {
             type="text"
             value={youtube}
             placeholder="youtube"
-            icon='fab fa-youtube'
+            icon="fab fa-youtube"
             id="input-social5"
             ariaLabel="youtube"
             ariaDescribedby="input-social5"
@@ -176,13 +170,12 @@ class CreateProfile extends Component {
               md={{ span: 6, offset: 3 }}
               lg={{ span: 6, offset: 3 }}
               style={{ marginTop: "7rem", marginBottom: "5rem" }}>
-
               <h1 className="display-4 text-center mb-0">Basic Profile</h1>
               <h4 className="text-center mb-4">
                 Let's make your profile stand out
               </h4>
 
-              <Form onSubmit={this.onSubmit} >
+              <Form onSubmit={this.onSubmit}>
                 <TextInputField
                   controlId="formBasicName"
                   name="handle"
@@ -219,7 +212,7 @@ class CreateProfile extends Component {
                   placeholder="Website"
                   onChange={this.handleTitleChange}
                   error={errors.website}
-                  info={"Company you are working for"}
+                  info={"Your portfolio website"}
                 />
                 <TextInputField
                   controlId="formBasicLocation"
@@ -251,9 +244,7 @@ class CreateProfile extends Component {
                   placeholder="Github Username"
                   onChange={this.handleTitleChange}
                   error={errors.githubusername}
-                  info={
-                    "Your github username"
-                  }
+                  info={"Your github username"}
                 />
                 <TextAreaField
                   name="bio"
@@ -279,7 +270,7 @@ class CreateProfile extends Component {
                 {socialInputs}
 
                 <Form.Group className="mt-4" as={Col}>
-                  <Button type='submit' className="btn-block" variant="success">
+                  <Button type="submit" className="btn-block" variant="success">
                     Submit
                   </Button>
                 </Form.Group>
@@ -294,7 +285,7 @@ class CreateProfile extends Component {
 
 CreateProfile.propTypes = {
   profile: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({

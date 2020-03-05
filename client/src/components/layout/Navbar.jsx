@@ -37,36 +37,40 @@ class NavBar extends Component {
             {<span className="h6">{user.name}</span>}
           </Dropdown.Toggle>
           <Dropdown.Menu>
-            <Dropdown.Item eventKey="2">
-              <Nav.Item>
-                <NavLink
-                  to="/edit-profile"
-                  activeClassName="selectedLink"
-                  style={{ textDecoration: "none", color: "black" }}>
-                  <i class="fas fa-user" aria-hidden="true"></i> Edit Profile
-                </NavLink>
-              </Nav.Item>
+            <Dropdown.Item
+              as={Link}
+              eventKey="1"
+              to="/dashboard"
+              style={{ textDecoration: "none", color: "black" }}>
+              <i className="fa fa-tachometer icon" aria-hidden="true"></i>{" "}
+              Dashboard
             </Dropdown.Item>
-            <Dropdown.Item eventKey="3">
-              <Nav.Item>
-                <NavLink
-                  to="/add-profile"
-                  style={{ textDecoration: "none", color: "black" }}>
-                  <i class="fab fa-black-tie" aria-hidden="true"></i> Add Experience
-                </NavLink>
-              </Nav.Item>
+            <Dropdown.Item
+              as={Link}
+              eventKey="2"
+              to="/edit-profile"
+              style={{ textDecoration: "none", color: "black" }}>
+              <i className="fas fa-user icon" aria-hidden="true"></i> Edit
+              Profile
             </Dropdown.Item>
-            <Dropdown.Item eventKey="4">
-              <Nav.Item>
-                <NavLink
-                  to="/add-education"
-                  style={{ textDecoration: "none", color: "black" }}>
-                  <i class="fas fa-graduation-cap" aria-hidden="true"></i> Add Education
-                </NavLink>
-              </Nav.Item>
+            <Dropdown.Item
+              as={Link}
+              eventKey="3"
+              to="/add-experience"
+              style={{ textDecoration: "none", color: "black" }}>
+              <i className="fab fa-black-tie icon" aria-hidden="true"></i> Add
+              Experience
             </Dropdown.Item>
-            
+            <Dropdown.Item
+              as={Link}
+              eventKey="4"
+              to="/add-education"
+              style={{ textDecoration: "none", color: "black" }}>
+              <i className="fas fa-graduation-cap icon" aria-hidden="true"></i>{" "}
+              Add Education
+            </Dropdown.Item>
             <Dropdown.Item eventKey="5" onClick={this.onLogoutClick}>
+              <i className="fas fa-power-off icon" aria-hidden="true"></i>{" "}
               Logout
             </Dropdown.Item>
           </Dropdown.Menu>
@@ -97,11 +101,34 @@ class NavBar extends Component {
               <Nav.Link>Developers</Nav.Link>
               <Nav.Link>Designers</Nav.Link>
               {isAuthenticated ? (
-                <Nav.Link
-                  className="d-lg-none d-xs-block d-sm-block d-md-none"
-                  onClick={this.onLogoutClick}>
-                  Logout
-                </Nav.Link>
+                <Nav>
+                  <Nav.Link
+                    className="d-lg-none d-xs-block d-sm-block d-md-none"
+                    to="/edit-profile">
+                    <i className="fas fa-user icon" aria-hidden="true"></i>
+                    Edit Profile
+                  </Nav.Link>
+                  <Nav.Link
+                    className="d-lg-none d-xs-block d-sm-block d-md-none"
+                    to="/add-experience">
+                    <i className="fab fa-black-tie icon" aria-hidden="true"></i>
+                    Add Experience
+                  </Nav.Link>
+                  <Nav.Link
+                    className="d-lg-none d-xs-block d-sm-block d-md-none"
+                    to="/add-education">
+                    <i
+                      className="fas fa-graduation-cap icon"
+                      aria-hidden="true"></i>
+                    Add Education
+                  </Nav.Link>
+                  <Nav.Link
+                    className="d-lg-none d-xs-block d-sm-block d-md-none"
+                    onClick={this.onLogoutClick}>
+                    <i className="fas fa-power-off icon" aria-hidden="true"></i>
+                    Logout
+                  </Nav.Link>
+                </Nav>
               ) : (
                 <div className="d-lg-none d-xs-block d-sm-block d-md-none">
                   <Nav.Link

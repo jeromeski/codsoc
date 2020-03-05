@@ -14,11 +14,6 @@ import { connect } from "react-redux";
 import { registerUser } from "../../redux/auth/auth.actions";
 import ReactTimeout from "react-timeout";
 import TextInputField from "../common/TextInputField";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { fab } from "@fortawesome/free-brands-svg-icons";
-
-library.add(fab);
 
 class Register extends Component {
   state = {
@@ -148,7 +143,7 @@ class Register extends Component {
                       )}
                     </Button>
                   </Form.Group> 
-                  <span className='text-muted' >or Register with</span>
+                <span className='text-muted'>or Register with </span>
                   <Form.Group as={Col}
                    className='mt-0'
                   >
@@ -157,8 +152,16 @@ class Register extends Component {
                       variant='danger'
                       style={{ padding: ".5rem 1rem", marginTop: "1rem" }}
                       >
-                      <FontAwesomeIcon icon={["fab", "google"]} />
+                      <i className='fab fa-google'></i>
                       {' '}Google
+                    </Button>
+                    <Button
+                      className='btn-block'
+                      variant='primary'
+                      style={{ padding: ".5rem 1rem", marginTop: "1rem" }}
+                      >
+                      <i className='fab fa-facebook'></i>
+                      {' '}Facebook
                     </Button>
                   </Form.Group>
                 </Form>
@@ -175,7 +178,6 @@ Register.propTypes = {
   registerUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
-  isLoading: PropTypes.bool.isRequired
 };
 
 TextInputField.defaultProps = {

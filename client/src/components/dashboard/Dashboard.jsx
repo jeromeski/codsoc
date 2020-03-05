@@ -10,6 +10,7 @@ import SpinnerComponent from "../common/Spinner";
 import ProfileActions from "./ProfileActions";
 
 class Dashboard extends Component {
+  
   componentDidMount() {
     this.props.getCurrentProfile();
   }
@@ -38,16 +39,15 @@ class Dashboard extends Component {
               Welcome <span className="h5">{user.name}</span>
             </p>
             <p className="lead text-muted">
-              Spice up your profile by adding information.
+              Spice up your profile by adding some information.
             </p>
-
-            <div style={{ marginBottom: "60px" }}>
+            <ProfileActions />
+            <div style={{ marginTop: "60px" }}>
               <Button 
                 variant="danger"
                 onClick={this.handleDeleteAccount}
               > Delete My Account</Button>
             </div>
-            <ProfileActions />
           </div>
         );
       } else {
