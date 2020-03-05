@@ -1,10 +1,5 @@
 import React from "react";
 import PropTypes from 'prop-types'
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { far } from "@fortawesome/free-regular-svg-icons";
-import { fas } from "@fortawesome/free-solid-svg-icons";
-import { fab } from "@fortawesome/free-brands-svg-icons";
 import {
   InputGroup,
   Col,
@@ -12,12 +7,8 @@ import {
   FormGroup
 } from "react-bootstrap";
 
-library.add(far, fas, fab);
 
 const SocialMediaInputField = ({
-  far,
-  fas,
-  fab,
   icon,
   id,
   type,
@@ -32,7 +23,7 @@ const SocialMediaInputField = ({
       <InputGroup as={Col}>
         <InputGroup.Prepend>
           <InputGroup.Text id={id}>
-            <FontAwesomeIcon icon={icon} />
+            <i className={`${icon}`}></i>
           </InputGroup.Text>
         </InputGroup.Prepend>
         <FormControl
@@ -53,7 +44,7 @@ SocialMediaInputField.propTypes = {
   name: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
   value: PropTypes.string.isRequired,
-  icon: PropTypes.array,
+  icon: PropTypes.string,
   error: PropTypes.string,
   onChange: PropTypes.func.isRequired,
   id: PropTypes.string

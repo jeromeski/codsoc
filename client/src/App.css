@@ -48,3 +48,7 @@ html {
   /* background-color: lightblue !important; */
 }
 
+.dropdown-item.active {
+  background-color: lightgray !important;
+}
+

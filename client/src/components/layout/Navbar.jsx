@@ -38,11 +38,35 @@ class NavBar extends Component {
           </Dropdown.Toggle>
           <Dropdown.Menu>
             <Dropdown.Item eventKey="2">
-              <span> </span>
-              Settings
+              <Nav.Item>
+                <NavLink
+                  to="/edit-profile"
+                  activeClassName="selectedLink"
+                  style={{ textDecoration: "none", color: "black" }}>
+                  <i class="fas fa-user" aria-hidden="true"></i> Edit Profile
+                </NavLink>
+              </Nav.Item>
             </Dropdown.Item>
-            <Dropdown.Item eventKey="3">Profile</Dropdown.Item>
-            <Dropdown.Item eventKey="4" onClick={this.onLogoutClick}>
+            <Dropdown.Item eventKey="3">
+              <Nav.Item>
+                <NavLink
+                  to="/add-profile"
+                  style={{ textDecoration: "none", color: "black" }}>
+                  <i class="fab fa-black-tie" aria-hidden="true"></i> Add Experience
+                </NavLink>
+              </Nav.Item>
+            </Dropdown.Item>
+            <Dropdown.Item eventKey="4">
+              <Nav.Item>
+                <NavLink
+                  to="/add-education"
+                  style={{ textDecoration: "none", color: "black" }}>
+                  <i class="fas fa-graduation-cap" aria-hidden="true"></i> Add Education
+                </NavLink>
+              </Nav.Item>
+            </Dropdown.Item>
+            
+            <Dropdown.Item eventKey="5" onClick={this.onLogoutClick}>
               Logout
             </Dropdown.Item>
           </Dropdown.Menu>

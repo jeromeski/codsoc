@@ -5,6 +5,7 @@ import {
   CLEAR_CURRENT_PROFILE
 } from "./profile.types";
 import { GET_ERRORS } from "../error/error.types";
+import { SET_CURRENT_USER } from "../auth/auth.types";
 
 // Get current profile
 export const getCurrentProfile = () => dispatch => {
@@ -36,6 +37,26 @@ export const createProfile = (profileData, history) => dispatch => {
         payload: err.response.data
       })
     );
+};
+
+// Delete account & profile
+export const deleteAccount = () => dispatch => {
+  if (window.confirm("Are you sure? This can NOT be undone!")) {
+    axios
+      .delete("/api/profile")
+      .then(res =>
+        dispatch({
+          type: SET_CURRENT_USER,
+          payload: {}
+        })
+      )
+      .catch(err =>
+        dispatch({
+          type: GET_ERRORS,
+          payload: err.response.data
+        })
+      );
+  }
 };
 
 // Profile Loading

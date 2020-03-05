@@ -108,7 +108,7 @@ class CreateProfile extends Component {
             type="text"
             value={twitter}
             placeholder="twitter"
-            icon={["fab", "twitter"]}
+            icon='fab fa-twitter'
             id="input-social1"
             ariaLabel="twitter"
             ariaDescribedby="input-social1"
@@ -120,7 +120,7 @@ class CreateProfile extends Component {
             type="text"
             value={facebook}
             placeholder="facebook"
-            icon={["fab", "facebook"]}
+            icon='fab fa-facebook-f'
             id="input-social2"
             ariaLabel="facebook"
             ariaDescribedby="input-social2"
@@ -132,7 +132,8 @@ class CreateProfile extends Component {
             type="text"
             value={instagram}
             placeholder="instagram"
-            icon={["fab", "instagram"]}
+            
+            icon='fab fa-instagram'
             id="input-social3"
             ariaLabel="instagram"
             ariaDescribedby="input-social3"
@@ -144,7 +145,7 @@ class CreateProfile extends Component {
             type="text"
             value={linkedin}
             placeholder="linkedin"
-            icon={["fab", "linkedin"]}
+            icon='fab fa-linkedin'
             id="input-social4"
             ariaLabel="linkedin"
             ariaDescribedby="input-social4"
@@ -156,7 +157,7 @@ class CreateProfile extends Component {
             type="text"
             value={youtube}
             placeholder="youtube"
-            icon={["fab", "youtube"]}
+            icon='fab fa-youtube'
             id="input-social5"
             ariaLabel="youtube"
             ariaDescribedby="input-social5"
@@ -251,7 +252,7 @@ class CreateProfile extends Component {
                   onChange={this.handleTitleChange}
                   error={errors.githubusername}
                   info={
-                    "Please use comma separated values (eg. HTML,CSS,JavaScript,PHP)"
+                    "Your github username"
                   }
                 />
                 <TextAreaField
@@ -294,7 +295,6 @@ class CreateProfile extends Component {
 CreateProfile.propTypes = {
   profile: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
-  // createProfile: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
