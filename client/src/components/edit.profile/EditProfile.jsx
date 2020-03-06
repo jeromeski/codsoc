@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { Container, Row, Col, Button, Form } from "react-bootstrap";
 import TextInputField from "../common/TextInputField";
@@ -213,12 +213,13 @@ class EditProfile extends Component {
               md={{ span: 6, offset: 3 }}
               lg={{ span: 6, offset: 3 }}
               style={{ marginTop: "7rem", marginBottom: "5rem" }}>
-
-              <h1 className="display-4 text-center mb-0">Edit Profile</h1>
-
-              <Row>
-                <Col className='mb-4'><hr/></Col>
-              </Row>
+              <Button variant="dark" as={Link} to="/dashboard">
+                Go Back
+              </Button>
+              <h1 className="display-4 text-center mb-0">Basic Profile</h1>
+              <p className="lead text-center">
+                Complete this form to get you started
+              </p>
 
               <Form onSubmit={this.onSubmit} >
                 <TextInputField

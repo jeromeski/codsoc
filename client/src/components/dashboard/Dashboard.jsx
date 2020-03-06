@@ -8,6 +8,8 @@ import { connect } from "react-redux";
 import { getCurrentProfile, deleteAccount } from "../../redux/profile/profile.actions";
 import SpinnerComponent from "../common/Spinner";
 import ProfileActions from "./ProfileActions";
+import Experience from "./Experience";
+import Education from './Education';
 
 class Dashboard extends Component {
   
@@ -38,10 +40,9 @@ class Dashboard extends Component {
             <p className="lead text-muted">
               Welcome <span className="h5">{user.name}</span>
             </p>
-            <p className="lead text-muted">
-              Spice up your profile by adding some information.
-            </p>
-            <ProfileActions />
+            <ProfileActions/>
+            <Experience experience={profile.experience} />
+            <Education education={profile.education} />
             <div style={{ marginTop: "60px" }}>
               <Button 
                 variant="danger"

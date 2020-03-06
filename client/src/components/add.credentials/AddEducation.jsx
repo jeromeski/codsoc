@@ -5,13 +5,13 @@ import TextAreaField from "../common/TextAreaField";
 import PropTypes from "prop-types";
 import { Container, Row, Col, Button, Form } from "react-bootstrap";
 import TextInputField from "../common/TextInputField";
-import { addExperience } from "../../redux/profile/profile.actions";
+import { addEducation } from "../../redux/profile/profile.actions";
 
-class AddExperience extends Component {
+class AddEducation extends Component {
   state = {
-    company: "",
-    title: "",
-    location: "",
+    school: "",
+    degree: "",
+    fieldofstudy: "",
     from: "",
     to: "",
     current: false,
@@ -42,23 +42,22 @@ class AddExperience extends Component {
   handleOnSubmit = evt => {
     evt.preventDefault();
 
-    const expData = {
-      company: this.state.company,
-      title: this.state.title,
-      location: this.state.location,
+    const eduData = {
+      school: this.state.school,
+      degree: this.state.degree,
+      fieldofstudy: this.state.fieldofstudy,
       from: this.state.from,
       to: this.state.to,
       current: this.state.current,
-      description: this.state.description,
-      disabled: this.state.disabled
+      description: this.state.description
     };
-    this.props.addExperience(expData, this.props.history);
+    this.props.addEducation(eduData, this.props.history);
   };
 
   render() {
     const { errors } = this.state;
     return (
-      <div className="add-experience">
+      <div className="add-education">
         <Container>
           <Row>
             <Col
@@ -70,26 +69,33 @@ class AddExperience extends Component {
                 Go Back
               </Button>
 
-              <h1 className="display-4 text-center">Add Experience</h1>
+              <h1 className="display-4 text-center">Add Education</h1>
               <p className="lead text-center">
-                Any job or position you have had in the past
+                Tell your audience about your education
               </p>
               {/*<small className='d-block pb-3'>* = required fields</small>*/}
 
               <Form onSubmit={this.handleOnSubmit}>
                 <TextInputField
-                  placeholder="Company"
-                  name="company"
-                  value={this.state.company}
+                  placeholder="School"
+                  name="school"
+                  value={this.state.school}
                   onChange={this.handleTitleChange}
-                  error={errors.company}
+                  error={errors.school}
                 />
                 <TextInputField
-                  placeholder="Job Title"
-                  name="title"
-                  value={this.state.title}
+                  placeholder="Degree"
+                  name="degree"
+                  value={this.state.degree}
                   onChange={this.handleTitleChange}
-                  error={errors.title}
+                  error={errors.degree}
+                />
+                <TextInputField
+                  placeholder="Field of study"
+                  name="fieldofstudy"
+                  value={this.state.fieldofstudy}
+                  onChange={this.handleTitleChange}
+                  error={errors.fieldofstudy}
                 />
                 <h6 className="ml-4">From Date</h6>
                 <TextInputField
@@ -110,13 +116,13 @@ class AddExperience extends Component {
                 />
                 <Form.Group className="ml-4" controlId="formCheckbox">
                   <Form.Check
-                    id="current"
-                    type="checkbox"
-                    name="current"
-                    value={this.state.current}
-                    checked={this.state.current}
-                    label="Current Job"
-                    onChange={this.handleOnCheck}
+                  id="current"
+                  type="checkbox"
+                  name="current"
+                  value={this.state.current}
+                  checked={this.state.current}
+                  label="Current"
+                  onChange={this.handleOnCheck}
                   />
                 </Form.Group>
                 <TextAreaField
@@ -140,10 +146,10 @@ class AddExperience extends Component {
   }
 }
 
-AddExperience.propTypes = {
+AddEducation.propTypes = {
   profile: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
-  addExperience: PropTypes.func.isRequired
+  addEducation: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -151,6 +157,6 @@ const mapStateToProps = state => ({
   errors: state.errors
 });
 
-export default connect(mapStateToProps, { addExperience })(
-  withRouter(AddExperience)
+export default connect(mapStateToProps, { addEducation })(
+  withRouter(AddEducation)
 );

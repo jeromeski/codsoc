@@ -5,7 +5,7 @@ import { ButtonToolbar, ButtonGroup, Button } from 'react-bootstrap';
 
 const ProfileActions = () => {
   return (
-    <ButtonToolbar>
+    <ButtonToolbar className='profile-actions mb-4'>
       <ButtonGroup>
         <Button variant='light' as={Link} to='/edit-profile'>
         <i className='fas fa-user' aria-hidden='true'></i>{' '}
