@@ -37,7 +37,7 @@ class Profiles extends Component {
               <p className="lead text-center">
                 Browse and connect with the best developers
               </p>
-              <Row>{profileItems}</Row>
+              <Row className='justify-content-center'>{profileItems}</Row>
             </Col>
           </Row>
         </Container>

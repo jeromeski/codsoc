@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import ProfileHeader from "./ProfileHeader";
@@ -8,9 +8,8 @@ import ProfileGithub from "./ProfileGithub";
 import ProfileAbout from "./ProfileAbout";
 
 import { getProfileByHandle } from "../../redux/profile/profile.actions";
-import { Container, Row, Col, Button } from "react-bootstrap";
+import { Container, Row, Col, Button, Card } from "react-bootstrap";
 import SpinnerComponent from "../common/Spinner";
-
 
 class Profile extends Component {
   componentDidMount() {
@@ -22,7 +21,7 @@ class Profile extends Component {
 
   UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.profile.profile === null && this.props.profile.loading) {
-      this.props.history.push('/not-found')
+      this.props.history.push("/not-found");
     }
   }
 
@@ -38,28 +37,37 @@ class Profile extends Component {
           <Row>
             <Col
               xs={12}
-              md={{ span: 6, offset: 3 }}
-              lg={{ span: 8, offset: 2 }}
-              style={{ marginTop: "5rem", marginBottom: "5rem" }}
-              >
-              <Button variant="dark" as={Link} to="/profiles">
+              md={{ span: 8, offset: 2 }}
+              style={{ marginTop: "5rem", marginBottom: "5rem" }}>
+              <Button variant="dark" as={Link} to="/profiles" className="mb-4">
                 Go Back
               </Button>
-              <ProfileHeader profile={profile} />
-              <ProfileAbout />
-              <ProfileCreds />
-              <ProfileGithub />
+              <Card>
+                <Card.Body>
+                  <ProfileHeader profile={profile} />
+                </Card.Body>
+                <Card.Body>
+                  <Card>
+                    <ProfileAbout profile={profile} />
+                  </Card>
+                </Card.Body>
+                <Card.Body>
+                  <ProfileCreds 
+                    experience={profile.experience}
+                    education={profile.education} 
+                  />
+                </Card.Body>
+                <Card.Body>
+                  <ProfileGithub />
+                </Card.Body>
+              </Card>
             </Col>
           </Row>
         </Container>
       );
     }
 
-    return (
-      <div className='profile'>
-        {profileContent}
-      </div>
-      );
+    return <div className="profile">{profileContent}</div>;
   }
 }
 

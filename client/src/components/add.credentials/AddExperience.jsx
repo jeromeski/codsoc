@@ -91,6 +91,13 @@ class AddExperience extends Component {
                   onChange={this.handleTitleChange}
                   error={errors.title}
                 />
+                <TextInputField
+                  placeholder="Location"
+                  name="location"
+                  value={this.state.location}
+                  onChange={this.handleTitleChange}
+                  error={errors.location}
+                />
                 <h6 className="ml-4">From Date</h6>
                 <TextInputField
                   name="from"
