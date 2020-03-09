@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 import isEmpty from "../../validation/is-empty";
-import { Button, Card } from "react-bootstrap";
+import { Card, Badge } from "react-bootstrap";
 
 
 class ProfileAbout extends Component {
@@ -18,9 +18,11 @@ class ProfileAbout extends Component {
               padding: '.5rem'
             }}>
             {profile.skills.map((skill, index) => (
-              <Button className='mr-1 mb-1 py-0' size='md' variant="secondary" key={index}>
-                {skill}
-              </Button>
+              <Badge className='mr-2 badge-pill' size='lg' variant="light" key={index}>
+                <h6
+                  style={{padding: '.25rem'}}
+                >{skill}</h6>
+              </Badge>
             ))}
             </Card.Text>
           </Card.Body>

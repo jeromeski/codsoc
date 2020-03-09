@@ -58,7 +58,7 @@ class Profile extends Component {
                   />
                 </Card.Body>
                 <Card.Body>
-                  <ProfileGithub />
+                  <ProfileGithub username={profile.githubusername}/>
                 </Card.Body>
               </Card>
             </Col>
