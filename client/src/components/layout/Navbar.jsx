@@ -98,7 +98,9 @@ class NavBar extends Component {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="mr-auto">
-              <Nav.Link>Developers</Nav.Link>
+              <Nav.Item>
+                <Nav.Link as={NavLink} to='/profiles' >Developers</Nav.Link>
+              </Nav.Item>
               <Nav.Link>Designers</Nav.Link>
               {isAuthenticated ? (
                 <Nav>
