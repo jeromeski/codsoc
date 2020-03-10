@@ -1,6 +1,7 @@
 import React from "react";
 import { Form, Col } from "react-bootstrap";
 import PropTypes from "prop-types";
+import classnames from "classnames";
 
 const TextAreaField = ({
   name,
@@ -9,20 +10,21 @@ const TextAreaField = ({
   onChange,
   error,
   info,
-  controlId,
+  controlId
 }) => {
   return (
     <Form.Group controlId={controlId} as={Col}>
-      <Form.Control 
-        as="textarea" 
-        rows="3" 
+      <Form.Control
+        className={classnames({ "is-invalid": error })}
+        as="textarea"
+        rows="3"
         name={name}
         value={value}
         placeholder={placeholder}
         onChange={onChange}
         error={error}
       />
-      {info && <small className='form-text text-muted'>{info}</small>}
+      {info && <small className="form-text text-muted">{info}</small>}
       {error && <div className="invalid-feedback">{error}</div>}
     </Form.Group>
   );

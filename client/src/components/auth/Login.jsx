@@ -11,7 +11,7 @@ import {
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { loginUser } from "../../redux/auth/auth.actions";
-import ReactTimeout from "react-timeout";
+import ReactTimeout from 'react-timeout';
 import TextInputField from "../common/TextInputField";
 
 class Login extends Component {

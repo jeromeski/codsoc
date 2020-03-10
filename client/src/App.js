@@ -21,6 +21,7 @@ import AddEducation from "./components/add.credentials/AddEducation";
 import Profiles from "./components/profiles/Profiles";
 import Profile from "./components/profiles/Profile";
 import NotFound from "./components/common/NotFound";
+import Posts from "./components/posts/Posts";
 
 // Check for token
 if (localStorage.jwtToken) {
@@ -45,8 +46,8 @@ if (localStorage.jwtToken) {
 
 const App = () => {
   return (
-    <div className='App'>
-      <Navbar  />
+    <div className="App">
+      <Navbar />
       <Route exact path="/" component={Landing} />
       <Container>
         <Route exact path="/register" component={Register} />
@@ -57,16 +58,27 @@ const App = () => {
           <PrivateRoute exact path="/dashboard" component={Dashboard} />
         </Switch>
         <Switch>
-          <PrivateRoute exact path="/create-profile" component={CreateProfile} />
+          <PrivateRoute
+            exact
+            path="/create-profile"
+            component={CreateProfile}
+          />
         </Switch>
         <Switch>
           <PrivateRoute exact path="/edit-profile" component={EditProfile} />
         </Switch>
         <Switch>
-          <PrivateRoute exact path="/add-experience" component={AddExperience} />
+          <PrivateRoute
+            exact
+            path="/add-experience"
+            component={AddExperience}
+          />
         </Switch>
         <Switch>
           <PrivateRoute exact path="/add-education" component={AddEducation} />
+        </Switch>
+        <Switch>
+          <PrivateRoute exact path="/feed" component={Posts} />
         </Switch>
         <Route exact path="/not-found" component={NotFound} />
       </Container>

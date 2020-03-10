@@ -19,9 +19,9 @@ class ProfileAbout extends Component {
             }}>
             {profile.skills.map((skill, index) => (
               <Badge className='mr-2 badge-pill' size='lg' variant="light" key={index}>
-                <h6
+                <span
                   style={{padding: '.25rem'}}
-                >{skill}</h6>
+                >{skill}</span>
               </Badge>
             ))}
             </Card.Text>

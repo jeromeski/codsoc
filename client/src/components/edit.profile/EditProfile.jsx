@@ -211,7 +211,6 @@ class EditProfile extends Component {
             <Col
               xs={12}
               md={{ span: 6, offset: 3 }}
-              lg={{ span: 6, offset: 3 }}
               style={{ marginTop: "7rem", marginBottom: "5rem" }}>
               <Button variant="dark" as={Link} to="/dashboard">
                 Go Back

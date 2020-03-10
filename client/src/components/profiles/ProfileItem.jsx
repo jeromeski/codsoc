@@ -9,7 +9,11 @@ class ProfileItem extends Component {
     const { profile } = this.props;
 
     return (
-      <Card className='mx-auto mb-3' bg="light" style={{ width: "15rem" }}>
+      <Card 
+        className='mx-auto mb-3'
+        bg="light" 
+        style={{ width: "15rem" }}
+        >
         <Card.Body as={Row} className="mb-0">
           <Col xs={6} className="mx-0 pr-0">
             <Image fluid src={profile.user.avatar} alt="" roundedCircle />

@@ -22,9 +22,12 @@ class ProfileGithub extends Component {
     )
       .then(res => res.json())
       .then(data => {
-        if (this.refs.myRef) {
-          this.setState({ repos: data });
-        }
+        // if (
+        //   this.refs.myRef
+        //   ) {
+        //   this.setState({ repos: data });
+        // }
+        this.setState({ repos: data });
       })
       .catch(err => console.log(err));
   }
@@ -42,7 +45,7 @@ class ProfileGithub extends Component {
               <Link
                 to={repo.html_url}
                 className="text-secondary"
-                target="_blank">
+              >
                 {repo.name}
               </Link>
             </h6>
@@ -66,7 +69,9 @@ class ProfileGithub extends Component {
       </ListGroupItem>
     ));
     return (
-      <div ref="myRef">
+      <div 
+        // ref="myRef"
+      >
         <ListGroup>
           <ListGroupItem>
             <h5 className="text-info">Latest Github Repos</h5>

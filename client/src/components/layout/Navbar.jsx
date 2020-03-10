@@ -24,6 +24,14 @@ class NavBar extends Component {
     const authLinks = (
       <Nav className="d-none d-md-block">
         <Dropdown className="avatar-dropdown">
+          <Nav.Link 
+            onClick={() => this.handleClick("/feed")}
+            style={{padding: 0, margin: 0}}
+          >
+          <i className="fa fa-bell fa-lg icon" aria-hidden="true"
+            style={{verticalAlign: '-.5rem', color: 'white'}}
+          ></i>
+          </Nav.Link>
           <Dropdown.Toggle
             variant="secondary"
             style={{ backgroundColor: "transparent", border: "none" }}>
@@ -99,9 +107,15 @@ class NavBar extends Component {
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="mr-auto">
               <Nav.Item>
-                <Nav.Link as={NavLink} to='/profiles' >Developers</Nav.Link>
+                <Nav.Link
+                  as={NavLink}
+                  eventKey={1}
+                  to="/profiles"
+                  // onSelect={() => console.log("NavItem Selected")}
+                >
+                  Developers
+                </Nav.Link>
               </Nav.Item>
-              <Nav.Link>Designers</Nav.Link>
               {isAuthenticated ? (
                 <Nav>
                   <Nav.Link
@@ -134,15 +148,24 @@ class NavBar extends Component {
               ) : (
                 <div className="d-lg-none d-xs-block d-sm-block d-md-none">
                   <Nav.Link
+                    className="text-light"
                     eventKey={1}
-                    onSelect={() => console.log("NavItem Selected")}
+                    // onSelect={() => console.log("NavItem Selected")}
+                    onClick={() => this.handleClick("/feed")}>
+                    Posts
+                  </Nav.Link>{" "}
+                  <Nav.Link
+                    className="text-light"
+                    eventKey={2}
+                    // onSelect={() => console.log("NavItem Selected")}
                     onClick={() => this.handleClick("/register")}>
                     Register
                   </Nav.Link>{" "}
-                  <span>or</span>{" "}
+                  <span className="text-secondary">or</span>{" "}
                   <Nav.Link
-                    eventKey={2}
-                    onSelect={() => console.log("NavItem Selected")}
+                    className="text-light"
+                    eventKey={3}
+                    // onSelect={() => console.log("NavItem Selected")}
                     onClick={() => this.handleClick("/login")}>
                     Login
                   </Nav.Link>

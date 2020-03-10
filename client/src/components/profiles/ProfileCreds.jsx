@@ -47,7 +47,7 @@ class ProfileCreds extends Component {
 
     return (
       <Row>
-        <Col xs={12} md={6} className='mb-4'>
+        <Col xs={12} md={6} className='mb-0'>
           <ListGroup>
             <ListGroupItem>
               <h5 className="text-center text-info">Experience</h5>
