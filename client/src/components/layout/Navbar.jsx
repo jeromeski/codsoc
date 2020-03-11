@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Navbar, Container, Nav, Image, Dropdown } from "react-bootstrap";
+import { Navbar, Container, Nav, Image, Dropdown, Badge } from "react-bootstrap";
 import { NavLink, Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -20,17 +20,18 @@ class NavBar extends Component {
   }
   render() {
     const { isAuthenticated, user } = this.props.auth;
-
+    const { posts } = this.props.post
     const authLinks = (
       <Nav className="d-none d-md-block">
         <Dropdown className="avatar-dropdown">
           <Nav.Link 
             onClick={() => this.handleClick("/feed")}
-            style={{padding: 0, margin: 0}}
+            style={{padding: 0, margin: 0, marginRight: '1rem'}}
           >
-          <i className="fa fa-bell fa-lg icon" aria-hidden="true"
+          <i className="far fa-bell fa-lg icon" aria-hidden="true"
             style={{verticalAlign: '-.5rem', color: 'white'}}
           ></i>
+          <Badge className='notification' variant='info'>{posts.length}</Badge>
           </Nav.Link>
           <Dropdown.Toggle
             variant="secondary"
@@ -182,11 +183,13 @@ class NavBar extends Component {
 
 Navbar.propTypes = {
   logoutUser: PropTypes.func,
-  auth: PropTypes.object
+  auth: PropTypes.object,
+  post: PropTypes.object
 };
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  post: state.post
 });
 
 export default connect(mapStateToProps, { logoutUser, clearCurrentProfile })(

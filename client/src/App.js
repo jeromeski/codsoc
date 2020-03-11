@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import "./App.css";
 import Navbar from "./components/layout/Navbar";
@@ -49,40 +49,55 @@ const App = () => {
     <div className="App">
       <Navbar />
       <Route exact path="/" component={Landing} />
-      <Container>
-        <Route exact path="/register" component={Register} />
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/profiles" component={Profiles} />
-        <Route exact path="/profile/:handle" component={Profile} />
-        <Switch>
-          <PrivateRoute exact path="/dashboard" component={Dashboard} />
-        </Switch>
-        <Switch>
-          <PrivateRoute
-            exact
-            path="/create-profile"
-            component={CreateProfile}
-          />
-        </Switch>
-        <Switch>
-          <PrivateRoute exact path="/edit-profile" component={EditProfile} />
-        </Switch>
-        <Switch>
-          <PrivateRoute
-            exact
-            path="/add-experience"
-            component={AddExperience}
-          />
-        </Switch>
-        <Switch>
-          <PrivateRoute exact path="/add-education" component={AddEducation} />
-        </Switch>
-        <Switch>
-          <PrivateRoute exact path="/feed" component={Posts} />
-        </Switch>
-        <Route exact path="/not-found" component={NotFound} />
-      </Container>
-    </div>
+      <Route
+        path="/(.+)"
+        render={() => (
+          <Container>
+            <Route exact path="/register" component={Register} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/profiles" component={Profiles} />
+            <Route exact path="/profile/:handle" component={Profile} />
+            <Route exact path="/user/:_id" component={Profile} />
+            <Switch>
+              <PrivateRoute exact path="/dashboard" component={Dashboard} />
+            </Switch>
+            <Switch>
+              <PrivateRoute
+                exact
+                path="/create-profile"
+                component={CreateProfile}
+              />
+            </Switch>
+            <Switch>
+              <PrivateRoute
+                exact
+                path="/edit-profile"
+                component={EditProfile}
+              />
+            </Switch>
+            <Switch>
+              <PrivateRoute
+                exact
+                path="/add-experience"
+                component={AddExperience}
+              />
+            </Switch>
+            <Switch>
+              <PrivateRoute
+                exact
+                path="/add-education"
+                component={AddEducation}
+              />
+            </Switch>
+            <Switch>
+              <PrivateRoute exact path="/feed" component={Posts} />
+            </Switch>
+            <Route exact path="/not-found" component={NotFound} />
+            <Redirect to='/not-found'/> 
+          </Container>
+        )}
+      />
+    </div>    
   );
 };
 

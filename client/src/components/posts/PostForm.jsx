@@ -44,11 +44,12 @@ class PostForm extends Component {
 
   render() {
     const { text, errors } = this.state;
+    const { user } = this.props.auth
     return (
       <div className="post-form">
         <Card>
           <Card.Header>
-            <Card.Title>Say something...</Card.Title>
+            <Card.Title>{user.name}'s Topic</Card.Title>
           </Card.Header>
           <Form className="mt-3" onSubmit={this.handleSubmit}>
             <Form.Group>
