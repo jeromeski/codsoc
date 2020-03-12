@@ -22,7 +22,7 @@ import Profiles from "./components/profiles/Profiles";
 import Profile from "./components/profiles/Profile";
 import NotFound from "./components/common/NotFound";
 import Posts from "./components/posts/Posts";
-import Post from "./components/posts/Post";
+import Post from "./components/Post/Post";
 
 // Check for token
 if (localStorage.jwtToken) {

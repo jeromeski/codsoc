@@ -4,8 +4,9 @@ import { connect } from "react-redux";
 import { getPost } from "../../redux/post/post.actions";
 import { Button, Col, Row, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import PostItem from "./PostItem";
+import PostItem from "../posts/PostItem";
 import SpinnerComponent from "../common/Spinner";
+import CommentForm from "./CommentForm";
 
 class Post extends Component {
   componentDidMount() {
@@ -22,6 +23,7 @@ class Post extends Component {
       postContent = (
         <div>
           <PostItem post={post} showActions={false} />
+          <CommentForm postId={post._id} />
         </div>
       );
     }

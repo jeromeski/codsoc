@@ -5,7 +5,6 @@ import {
   Nav,
   Image,
   Dropdown,
-  Badge
 } from "react-bootstrap";
 import { NavLink, Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
@@ -27,7 +26,6 @@ class NavBar extends Component {
   }
   render() {
     const { isAuthenticated, user } = this.props.auth;
-    const { posts } = this.props.post;
     const authLinks = (
       <Nav className="d-none d-md-block">
         <Dropdown className="avatar-dropdown">

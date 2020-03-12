@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { addPost } from "../../redux/post/post.actions";
+import { addComment } from "../../redux/post/post.actions";
 import { Card, Form, Button, Col } from "react-bootstrap";
 import TextAreaField from "../common/TextAreaField";
 
-class PostForm extends Component {
+class CommentForm extends Component {
 
   state = {
     text: "",
@@ -31,25 +31,26 @@ class PostForm extends Component {
     evt.preventDefault();
 
     const { user } = this.props.auth;
+    const {postId} = this.props
 
-    const newPost = {
+    const newComment = {
       text: this.state.text,
       name: user.name,
       avatar: user.avatar
     };
 
-    this.props.addPost(newPost);
+    this.props.addComment(postId, newComment);
     this.setState({ text: "" });
   };
 
   render() {
     const { text, errors } = this.state;
-    // const { user } = this.props.auth
+    const { user } = this.props.auth
     return (
       <div className="post-form">
         <Card>
           <Card.Header>
-            <Card.Title>Post a topic</Card.Title>
+            <Card.Title>Make a comment</Card.Title>
           </Card.Header>
           <Form className="mt-3" onSubmit={this.handleSubmit}>
             <Form.Group>
@@ -57,7 +58,7 @@ class PostForm extends Component {
                 name="text"
                 value={text}
                 controlId="textArea1"
-                placeholder="Type your topic here"
+                placeholder="Reply to post here"
                 onChange={this.handleTitleChange}
                 error={errors.text}
               />
@@ -72,8 +73,9 @@ class PostForm extends Component {
   }
 }
 
-PostForm.propTypes = {
-  addPost: PropTypes.func.isRequired,
+CommentForm.propTypes = {
+  addComment: PropTypes.func.isRequired,
+  postId: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
 };
@@ -83,4 +85,4 @@ const mapStateToProps = ({errors, auth}) => ({
   errors
 });
 
-export default connect(mapStateToProps, { addPost })(PostForm);
+export default connect(mapStateToProps, { addComment })(CommentForm);

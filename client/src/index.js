@@ -4,11 +4,8 @@ import {Provider} from 'react-redux';
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-// import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter } from "react-router-dom";
-// import { browserHistory, IndexRoute } from 'react-router'
 import store from "./redux/store";
-import Dashboard from "./components/dashboard/Dashboard";
 
 
 ReactDOM.render(
