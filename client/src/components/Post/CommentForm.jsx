@@ -45,7 +45,6 @@ class CommentForm extends Component {
 
   render() {
     const { text, errors } = this.state;
-    const { user } = this.props.auth
     return (
       <div className="post-form">
         <Card>
@@ -75,7 +74,7 @@ class CommentForm extends Component {
 
 CommentForm.propTypes = {
   addComment: PropTypes.func.isRequired,
-  postId: PropTypes.object.isRequired,
+  postId: PropTypes.string.isRequired,
   auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
 };
