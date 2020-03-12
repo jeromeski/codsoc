@@ -49,7 +49,7 @@ class PostForm extends Component {
       <div className="post-form">
         <Card>
           <Card.Header>
-            <Card.Title>{user.name}'s Topic</Card.Title>
+            <Card.Title>Post a topic</Card.Title>
           </Card.Header>
           <Form className="mt-3" onSubmit={this.handleSubmit}>
             <Form.Group>
@@ -57,7 +57,7 @@ class PostForm extends Component {
                 name="text"
                 value={text}
                 controlId="textArea1"
-                placeholder="Post a topic here"
+                placeholder="Type your topic here"
                 onChange={this.handleTitleChange}
                 error={errors.text}
               />

@@ -1,5 +1,12 @@
 import React, { Component } from "react";
-import { Navbar, Container, Nav, Image, Dropdown, Badge } from "react-bootstrap";
+import {
+  Navbar,
+  Container,
+  Nav,
+  Image,
+  Dropdown,
+  Badge
+} from "react-bootstrap";
 import { NavLink, Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -20,18 +27,15 @@ class NavBar extends Component {
   }
   render() {
     const { isAuthenticated, user } = this.props.auth;
-    const { posts } = this.props.post
+    const { posts } = this.props.post;
     const authLinks = (
       <Nav className="d-none d-md-block">
         <Dropdown className="avatar-dropdown">
-          <Nav.Link 
+          <Nav.Link
             onClick={() => this.handleClick("/feed")}
-            style={{padding: 0, margin: 0, marginRight: '1rem'}}
-          >
-          <i className="far fa-bell fa-lg icon" aria-hidden="true"
-            style={{verticalAlign: '-.5rem', color: 'white'}}
-          ></i>
-          <Badge className='notification' variant='info'>{posts.length}</Badge>
+            style={{ padding: 0, margin: 0, marginRight: "1rem" }}>
+            
+            Post feed
           </Nav.Link>
           <Dropdown.Toggle
             variant="secondary"
@@ -109,11 +113,8 @@ class NavBar extends Component {
             <Nav className="mr-auto">
               <Nav.Item>
                 <Nav.Link
-                  as={NavLink}
                   eventKey={1}
-                  to="/profiles"
-                  // onSelect={() => console.log("NavItem Selected")}
-                >
+                  onSelect={() => this.handleClick("/profiles")}>
                   Developers
                 </Nav.Link>
               </Nav.Item>
@@ -152,14 +153,14 @@ class NavBar extends Component {
                     className="text-light"
                     eventKey={1}
                     // onSelect={() => console.log("NavItem Selected")}
-                    onClick={() => this.handleClick("/feed")}>
+                    onSelect={() => this.handleClick("/feed")}>
                     Posts
                   </Nav.Link>{" "}
                   <Nav.Link
                     className="text-light"
                     eventKey={2}
                     // onSelect={() => console.log("NavItem Selected")}
-                    onClick={() => this.handleClick("/register")}>
+                    onSelect={() => this.handleClick("/register")}>
                     Register
                   </Nav.Link>{" "}
                   <span className="text-secondary">or</span>{" "}
@@ -167,7 +168,7 @@ class NavBar extends Component {
                     className="text-light"
                     eventKey={3}
                     // onSelect={() => console.log("NavItem Selected")}
-                    onClick={() => this.handleClick("/login")}>
+                    onSelect={() => this.handleClick("/login")}>
                     Login
                   </Nav.Link>
                 </div>

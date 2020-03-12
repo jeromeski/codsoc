@@ -31,7 +31,7 @@ class PostItem extends Component {
   }
 
   render() {
-    const { post, auth } = this.props;
+    const { post, auth, showActions } = this.props;
 
     return (
       <div className="post-item" style={{ margin: "2rem 0 2rem 0" }}>
@@ -59,45 +59,45 @@ class PostItem extends Component {
                 <Col className="align-self-start" xs={12}>
                   <p className="lead mb-0">{post.text}</p>
                 </Col>
-                <Col className="align-self-end xs={12}">
-                  <Button 
-                    variant="light" 
-                    className="mr-1" 
-                    size="sm"
-                    onClick={(evt) => this.handleLike(evt, post._id)}
-                  >  
-                  <i className={classnames('fas fa-thumbs-up',{
-                    'text-info' : this.findUserLike(post.likes) 
-                  })}></i>
-                    <Badge variant="light">{post.likes.length}</Badge>
+                {showActions ? <Col className="align-self-end" xs={12}>
+                <Button 
+                  variant="light" 
+                  className="mr-1" 
+                  size="sm"
+                  onClick={(evt) => this.handleLike(evt, post._id)}
+                >  
+                <i className={classnames('fas fa-thumbs-up',{
+                  'text-info' : this.findUserLike(post.likes) 
+                })}></i>
+                  <Badge variant="light">{post.likes.length}</Badge>
+                </Button>
+                <Button 
+                  variant="light" 
+                  className="mr-1" 
+                  size="sm"
+                  onClick={(evt) => this.handleUnlike(evt, post._id)}
+                >
+                  <i className="text-secondary fas fa-thumbs-down"></i>
+                </Button>
+                <Button
+                  size="sm"
+                  variant="light"
+                  as={Link}
+                  to={`/post/${post._id}`}>
+                  <i className="fa fa-comment-o mr-1" aria-hidden="true"></i>
+                  Comment
+                </Button>
+                {post.user === auth.user.id ? (
+                  <Button size="sm" variant="light" onClick={(evt) => this.handleDeletePost(evt, post._id)}>
+                    <i
+                      className="fa fa-trash mr-1"
+                      aria-hidden="true"></i>
+                      <span>Delete Post</span>
                   </Button>
-                  <Button 
-                    variant="light" 
-                    className="mr-1" 
-                    size="sm"
-                    onClick={(evt) => this.handleUnlike(evt, post._id)}
-                  >
-                    <i className="text-secondary fas fa-thumbs-down"></i>
-                  </Button>
-                  <Button
-                    size="sm"
-                    variant="light"
-                    as={Link}
-                    to={`/post/${post._id}`}>
-                    <i className="fa fa-comment-o mr-1" aria-hidden="true"></i>
-                    Comment
-                  </Button>
-                  {post.user === auth.user.id ? (
-                    <Button size="sm" variant="light" onClick={(evt) => this.handleDeletePost(evt, post._id)}>
-                      <i
-                        className="fa fa-trash mr-1"
-                        aria-hidden="true"></i>
-                        <span>Delete Post</span>
-                    </Button>
-                  ) : (
-                    ""
-                  )}
-                </Col>
+                ) : (
+                  null
+                )}
+              </Col> : null }
               </Row>
             </Col>
           </Card.Body>
@@ -105,6 +105,10 @@ class PostItem extends Component {
       </div>
     );
   }
+}
+
+PostItem.defaultProps = {
+  showActions: true
 }
 
 PostItem.propTypes = {
